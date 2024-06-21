@@ -207,7 +207,7 @@ app.get('/delete/:id', async (req, res) => {
 
 // User 
 //get from db 
-
+// Fetch users
 app.get('/adminuser', async (req, res) => {
   try {
     const users = await User.find();
