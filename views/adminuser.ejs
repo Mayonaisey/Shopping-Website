@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin User Management</title>
+    <link rel="stylesheet" href="./css/adminuser.css">
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Admin User Management</h1>
+        
+        <form action="/adminuser" method="POST" class="user-form" id="userForm">
+            <div class="form-group">
+                <label for="fullname">Full Name</label>
+                <input type="text" id="fullname" name="fullname" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phoneNumber" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="locationDetails">Location Details</label>
+                <input type="text" id="locationDetails" name="locationDetails" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit">Add User</button>
+        
+        </form>
+        
+       
+        <table>
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>City</th>
+                    <th>Address</th>
+                    <th>Location Details</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                    <tr>
+                        <td><%= user.fullname %></td>
+                        <td><%= user.email %></td>
+                        <td><%= user.phoneNumber %></td>
+                        <td><%= user.city %></td>
+                        <td><%= user.address %></td>
+                        <td><%= user.locationDetails %></td>
+                        <td>
+                            <a href="/edituser/<%= user._id %>">Edit</a>
+                            <a href="/deleteuser/<%= user._id %>" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <script src="./js/adminuser.js"></script>
+</body>
+</html>
