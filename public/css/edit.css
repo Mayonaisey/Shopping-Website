@@ -85,3 +85,42 @@ img {
 .hidden {
     display: none;
 }
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    select,
+    textarea {
+        font-size: 14px;
+    }
+
+    button[type="submit"] {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    select,
+    textarea {
+        font-size: 12px;
+    }
+
+    button[type="submit"] {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+}
