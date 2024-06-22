@@ -1,0 +1,267 @@
+.logo {
+    margin: 10px;
+    margin-left: 80px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    padding: 0%;
+    width: 90px;
+    border-radius: 50%;
+
+}
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #C9C0B3;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.brandname {
+    margin-top: 40px;
+}
+.icons i {
+    font-size: 2em;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.icons a {
+    color: #000;
+}
+
+.icons i:hover {
+    color: rgb(142, 170, 0);
+}
+
+.icon-container:hover .user-box {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.icon-container {
+    position: relative;
+    display: inline-block;
+}
+
+.user-box {
+    visibility: hidden;
+    width: 300px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+.user-box p {
+    margin-bottom: 10px;
+}
+
+.user-btn {
+    color: white;
+    background-color: #555;
+    border: none;
+    padding: 8px 16px;
+    margin: 5px 0;
+    cursor: pointer;
+    width: 90%;
+
+
+}
+
+.user-btn a {
+    text-decoration: none;
+    color: white;
+}
+
+.user-btn a:hover {
+    color: rgb(142, 170, 0);
+}
+#carticon{
+    margin-top: 40px;
+    margin-left: 1000px;
+    font-size: 25px;
+  
+  }
+  #homeicon{
+  
+    margin-top: 40px;
+    margin-left: 20px;
+    font-size: 25px;
+  
+  }
+
+body {
+    font-size: 18px;
+    /* background-color: #e2ddd7; */
+}
+.head{
+    font-size: 50px;
+}
+.cart {
+    display: block;
+
+}
+
+.listcart {
+    display: flex;
+    width: 60%;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    height: auto;
+    border: solid 2px #717463;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.image {
+    width: 30%;
+}
+
+.cart-info {
+    width: 20%;
+    padding: 5px;
+}
+
+.quan {
+    display: flex;
+    width: 15%;
+    border: black;
+    justify-content: center;
+    align-items: center;
+}
+
+.qy {
+    border: none;
+    width: 20px;
+    height: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.quan button {
+    border: none;
+    cursor: pointer;
+}
+
+.quan button:hover {
+    color: red;
+}
+
+.s {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-self: center;
+    justify-content: center;
+}
+
+.pr {
+    text-align: center;
+    height: 20px;
+    border: none;
+    outline: none;
+}
+
+.s span {
+    align-self: center;
+    justify-content: center;
+}
+
+.s span button {
+    border-radius: 5px;
+}
+
+.s span button:hover {
+    cursor: pointer;
+    background-color: rgb(34, 76, 34);
+    color: aliceblue;
+
+}
+
+.total {
+    border: none;
+}
+
+#Tprice {
+    border: none;
+    outline: none;
+    background-color: #f8f8f8;
+    width: 100%;
+    box-sizing: border-box;
+    min-width: fit-content;
+}
+
+.total-price {
+    border-radius: 15px;
+    width: 33%;
+    /* margin: 80px auto */
+    margin-top: 150px;
+    justify-content: space-between;
+    box-sizing: border-box;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #f8f8f8;
+}
+
+.total-price table {
+    justify-content: space-between;
+}
+
+.total-price table td {
+    padding: 10px;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+    background-color: #f8f8f8;
+    width: 50px;
+    box-sizing: content-box;
+}
+
+#Tprice {
+    width: 175px;
+    height: 15;
+    text-align: right;
+}
+
+#dis {
+    box-sizing: content-box;
+    border: none;
+    outline: none;
+    background-color: #f8f8f8;
+    width: 175px;
+    height: 15;
+    text-align: right;
+}
+
+#grand {
+    border: none;
+    outline: none;
+    width: 175px;
+    height: 15;
+    text-align: right;
+    background-color: #f8f8f8;
+}
+
+.to-checkout {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    transition: 0.25s;
+}
+
+.to-checkout:hover {
+    color: #f8f8f8;
+    background-color: rgb(34, 76, 34);
+}

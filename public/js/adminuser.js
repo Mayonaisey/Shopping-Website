@@ -1,5 +1,5 @@
 document.getElementById('userForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+    // event.preventDefault();
     
     let fullname = document.getElementById('fullname').value.trim();
     let phoneNumber = document.getElementById('phone').value.trim();

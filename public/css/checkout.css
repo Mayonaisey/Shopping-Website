@@ -1,0 +1,196 @@
+.logo {
+    margin: 10px;
+    margin-left: 80px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    padding: 0%;
+    width: 90px;
+    border-radius: 50%;
+
+}
+header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #C9C0B3;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.brandname {
+    margin-top: 40px;
+}
+.icons i {
+    font-size: 2em;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.icons a {
+    color: #000;
+}
+
+.icons i:hover {
+    color: rgb(142, 170, 0);
+}
+
+.icon-container:hover .user-box {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.icon-container {
+    position: relative;
+    display: inline-block;
+    margin-left:100px;
+}
+#carticon{
+    margin-top: 40px;
+    margin-left: 950px;
+    font-size: 25px;
+  
+  }
+  #homeicon{
+  
+    margin-top: 40px;
+    margin-left: 20px;
+    font-size: 25px;
+  
+  }
+.user-box {
+    visibility: hidden;
+    width: 300px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+.user-box p {
+    margin-bottom: 10px;
+}
+
+.user-btn {
+    color: white;
+    background-color: #555;
+    border: none;
+    padding: 8px 16px;
+    margin: 5px 0;
+    cursor: pointer;
+    width: 90%;
+
+
+}
+
+.user-btn a {
+    text-decoration: none;
+    color: white;
+}
+
+.user-btn a:hover {
+    color: rgb(142, 170, 0);
+}
+  
+body{
+    /* background-color: #FCF4EC; */
+    font-size: 16px;
+}
+.final{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    width:calc(100%+3px) ;
+    /* background-color: beige; */
+}
+.data {
+    margin:20px;
+    background-color:aliceblue;
+    width:100%;
+    border: solid 2px black;
+    border-radius:10px;
+    height: auto;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width:max-content;
+}
+
+label{
+    display:block;
+    margin-bottom: 5px
+}
+input {
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 2px;
+    /* margin:5px; */
+    /* margin-left:10px;
+    width: 300px; */
+}
+#bt{
+    text-align: center;
+}
+#bt:hover{
+    background-color: rgb(18, 57, 32);
+    color:aliceblue;
+    cursor: pointer;
+}
+#bt a{
+    text-decoration: none;
+}
+.TotalPrice{
+    display:flex;
+    padding-left:30px;
+}
+label[for="lb"]{
+    margin-top: auto;
+    padding-left:5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.total{
+    background-color: aliceblue;
+    margin-right: 0px;
+    margin-top: auto;
+    text-align: right; 
+    border: none;
+    outline:none;
+    font-weight:bold;
+    width:auto;
+    font-size: 16px;
+    font-weight: bold; 
+}
+#placeOrder{
+    width:425px;
+    height:40px;
+    padding-bottom:0px;
+    transition: 0.25s;
+}
+#placeOrder:hover{
+    background-color: rgb(34, 76, 34);
+    color:aliceblue;
+    cursor: pointer;
+}
+.error{
+    color: red;
+    font-size: 90%;
+}
+.row{
+    display:block;
+
+}
+
+/* .form-inline label, .form-inline input {
+    display: inline-block;
+    width: auto;
+    padding-right: 15px;
+}  */
