@@ -116,14 +116,14 @@
                     </td>
                     <td>
                         <ul>
-                            <% product.sizes.forEach(size => { %>
+                            <% (product.sizes || []).forEach(size => { %>
                                 <li><%= size.size %></li>
                             <% }); %>
                         </ul>
                     </td>
                     <td>
                         <ul>
-                            <% product.sizes.forEach(size => { %>
+                            <% (product.sizes || []).forEach(size => { %>
                                 <li><%= size.quantity %></li>
                             <% }); %>
                         </ul>

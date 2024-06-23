@@ -67,7 +67,7 @@
                         <input type="checkbox" id="size_<%= size %>" name="sizes" value="<%= size %>"
                                <% if (product.sizes.some(s => s.size === size)) { %> checked <% } %>>
                         <label for="size_<%= size %>"><%= size %></label>
-                        <input type="number" id="quantity_<%= size %>" name="quantities[]" min="0"
+                        <input type="number" id="quantity_<%= size %>" name="quantities" min="0"
                                value="<%= getProductQuantity(product.sizes, size) %>">
                     </div>
                 <% }); %>
@@ -98,9 +98,9 @@
             const type = formData.get('type').trim();
             const price = formData.get('price').trim();
             const description = formData.get('description').trim();
-            const sizes = formData.getAll('sizes[]'); // Get all selected sizes
-                const quantities = formData.getAll('quantities[]'); // Get all quantities
-
+            const sizes = formData.getAll('sizes'); // Get all selected sizes
+            const quantities = formData.getAll('quantities'); // Get all quantities
+            let sizeObj = []
     
             
             const lettersOnlyPattern = /^[A-Za-z]+$/;
@@ -127,22 +127,27 @@
                  alert("Product Description is required")
                 valid = false;
             }
-    
-            if (sizes.length !== quantities.length) {
-                    alert('Sizes and quantities must be of the same length.');
-                    valid = false;
-                }
+            for (const size of sizes){
+                const quantityElement = document.getElementById(`quantity_${size}`)
+                const quantity = quantityElement ? quantityElement.value : null;
 
-                // Validate quantities are positive integers
-                quantities.forEach(qty => {
-                    if (!Number.isInteger(parseInt(qty, 10)) || parseInt(qty, 10) <= 0) {
+                if (!quantity){
+                    alert('Sizes and quantities must be of the same length. or might assigned in wrong order');
+                    valid = false;
+                    break;
+                }
+                else if (!Number.isInteger(parseInt(quantity, 10)) || parseInt(quantity, 10) <= 0) {
                         alert('Quantities must be positive integers.');
                         valid = false;
-                    }});
+                        break
+                    }
+                else 
+                    sizeObj.push({"size": size, "quantity": quantity})
+            }
     
             if (valid) {
                 alert("add done")
-                event.target.submit();
+                // event.target.submit();
             } else {
                 alert(errorMessage);
             }
