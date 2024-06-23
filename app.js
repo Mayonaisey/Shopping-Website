@@ -12,6 +12,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 
+
 const port = 3000;
 
 //connect db
@@ -27,8 +28,9 @@ mongoose.connect(dbURl, {})
   });
 
 
-
-
+//mayaaaa
+const productsRouter=require('./routes/products');
+app.use('/products', productsRouter);
 
 
 // Routes
@@ -52,7 +54,7 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = function (req, file, cb) {
-  const filetypes = /jpeg|jpg|png|gif/;
+  const filetypes = /jpeg|jpg|png|gif|webp/;
   const mimetype = filetypes.test(file.mimetype);
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
   if (mimetype && extname) {
@@ -81,7 +83,7 @@ app.post('/adminchange', upload.fields([
   { name: 'image2', maxCount: 1 },
   { name: 'image3', maxCount: 1 }
 ]), [
-  body('name').isAlpha().withMessage('Product Name must contain letters only').notEmpty().withMessage('Product Name is required'),
+  body('name').notEmpty().withMessage('REQUIREDD'),
   body('type').isAlpha().withMessage('Product Type must contain letters only').notEmpty().withMessage('Product Type is required'),
   body('price').isFloat({ gt: 0 }).withMessage('Product Price must be a positive number').notEmpty().withMessage('Product Price is required'),
   body('description').notEmpty().withMessage('Product Description is required'),
@@ -207,7 +209,7 @@ app.get('/delete/:id', async (req, res) => {
 
 // User 
 //get from db 
-// Fetch users
+
 app.get('/adminuser', async (req, res) => {
   try {
     const users = await User.find();
