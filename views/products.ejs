@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>SEJAL.com</title>
+      <link rel="stylesheet" href="../public/css/productsStyle.css" />
+      <script src="https://kit.fontawesome.com/69992cfeb0.js"></script>
+    </head>
+    <body>
+      <header>
+        <h1> <a href="home.html" id="website-name"> SEJAL </a></h1>
+        <a href="home.html"><img src="images\logo.jpg" class="logo" alt="cannot load pic" width="50px"></a>
+        <div class="search-container">
+            <input id="search-bar" type="text" placeholder="Search..." >
+            <button class="bt">
+              <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+        <div class="icons">
+            <div class="icon-container">
+               <a href="myprofile.html"> <i class="fas fa-user"></i></a>
+                <div class="user-box">
+                    <p>Log in to enjoy special offers for members and fast checkout.</p>
+                    <button class="user-btn login-btn"><a href="signin.html">Log In</a></button>
+                    <button class="user-btn signup-btn"><a href="addaccount.html">create account</a></button>
+                </div>
+            </div>
+            <a href="itemsinwishlist.html" target="_blank">
+                <i class="far fa-heart"></i>
+            </a>
+            <a href="../Cart/cartWeb.html" target="_blank" class="icon-Cart">  
+                          <i class="fas fa-shopping-cart"></i><span id="Cart-Quantity">0</span></i></a>
+        </div>
+    </header>
+    <script src="cart.js"></script>  
+    <script src="../public/js/products.js"></script>  
+   <div id="fullpage">
+    <div id="page">
+     <div class="sidebar">
+          <h4 id="filter"><i class="fa-solid fa-filter"></i> Filters</h4>
+          <!--second is the dropdown menu for size-->
+       <div class="size-content">
+          <button class="size-btn" onclick="displaySize()">Size
+            <i class="fa fa-caret-down" ></i>
+          </button>
+          <div id="dropdown-size">
+            <!--buttons for range of sizes-->
+            <input type="radio" id="small" name="size" value="small">
+            <label for="small"> S</label><br>
+            <input type="radio" id="medium" name="size" value="medium">
+            <label for="medium">M</label><br> 
+            <input type="radio" id="large" name="size" value="large">
+            <label for="large">L</label><br>
+            <input type="radio" id="xlarge" name="size" value="xlarge">
+            <label for="xlarge">XL</label><br>
+          </div>
+        </div><!--close tag for size-content-->
+           <!--buttons for product types-->
+           <div class="product-content">
+          <button class="product-btn" onclick="displayProduct()">Product Type
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div id="dropdown-producttype"> 
+            <input type="radio" id="prod1" name="prod" value="T-shirt">
+            <label for="prod1">T-shirt</label><br>
+            <input type="radio" id="prod2" name="prod" value="Blouse">
+            <label for="prod2">Blouse</label><br>
+            <input type="radio" id="prod3" name="prod" value="Jeans">
+            <label for="prod3">Jeans</label><br>
+            <input type="radio" id="prod4" name="prod" value="Sweatshirt">
+            <label for="prod4">Sweatshirt</label><br>
+            <input type="radio" id="prod5" name="prod" value="Dress">
+            <label for="prod5">Dress</label><br>
+          </div>
+         </div><!--close tag for product-content-->
+     
+         <button type="button" id="searchBtn" onclick="searchProduct()">Search</button>
+         <button type="button" id="exitBtn" onclick="clearCart()">Exit Page</button>
+     </div> <!--close tag for sidebar-->
+          <!--here goes each product-->
+          <se5ction class="product-list">
+             <div class="producttxt"><h1>Products</h1></div>
+             <div id="product-container">
+                <% products.forEach((product)=>{ %>
+                    <button class="card" onclick="showItem(product)">
+                        <img src=<%= product.image1 %> class="img">
+                        <span class="tooltiptext"><%= product.name %></span>
+                        <p class="text"><%= product.name %></p>
+                        <p class="price">Price: <%= product.price %> EGP</p>
+                        <!-- <p class="sizes">Sizes: <%= product.size.join(", ") %></p> -->
+                    </button>
+                <% })%>
+             </div>
+          </section>
+    </div><!--close tag for page-->
+
+          <div class="div-buttom">
+            <div class="alldiv help">
+                <h3>HELP</h3>
+                <p><a href="#contact-us">Contact Us</a></p>
+                <p><a href="#return&changes">Return and Change</a></p>
+                <p><a href="#shipping&delivery">Shipping and Delivery</a></p>
+            </div>
+    
+            <div class="alldiv about-us">
+                <h3>ABOUT US</h3>
+                <p><a href="#aboutus">About us</a></p>
+                <p><a href="#CareerOpportunities">Career Opportunities</a></p>
+                <p><a href="#CorporateSupport">corporate Support</a></p>
+            </div>
+    
+            <div class="alldiv policies">
+                <h3>POLICIES</h3>
+                <p><a href="#DataPrivacyAndSecurityPolicy">Data Privacy And Security Policy</a></p>
+                <p><a href="#TermsOfUSe">Terms Of Use</a></p>
+            </div>
+    
+            <div class="alldiv logo">
+                <h1>SEJAL</h1>
+            </div>
+    
+        </div>
+   </div> <!--close tag for fullpage-->
+
+
+  </body>
+  </html>
+
+
+<!-- <div class="product-container">
+<table class="products-table ">
+  <tr>
+      <td >Photo1</td>
+      <td data-label="Age">Photo2</td>
+  </tr>
+  <tr>
+      <td data-label="Name">name1</td>
+      <td data-label="Age">name2</td>
+  </tr>
+  <tr>
+      <td data-label="Name">description1</td>
+      <td data-label="Age">description2</td>
+  </tr>
+</table>
+</div> -->

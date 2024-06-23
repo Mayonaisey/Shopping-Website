@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", function (req, res) {
+router.get("/", (req, res)=> {
   res.render('index', { user: (req.session.user === undefined ? "" : req.session.user) });
 });
 
-router.get('/slide', function (req, res) {
+router.get('/slide', (req, res)=> {
   res.render('slide', { user: (req.session.user === undefined ? "" : req.session.user) });
 });
 
-router.get('/about', function (req, res) {
+router.get('/about',  (req, res)=>{
   res.render('about', { user: (req.session.user === undefined ? "" : req.session.user) });
 });
 
