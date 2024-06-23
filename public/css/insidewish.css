@@ -1,0 +1,103 @@
+body{
+  background-color:#e3dfda;
+
+}
+.main{
+  display: inline-block;
+}
+      .picdiv{
+        width: 330px;
+        height: 470px;
+        display: block;
+        text-align: center;
+        padding: auto;
+        margin: 5px;
+      }
+      .pic{
+        width: 100%;
+        height: 100%;
+
+      }
+      
+.description{
+  text-decoration: underline;
+  color: black;
+}
+.description:active{
+  color: blue;
+}
+.basketbutton{
+  color: white;
+  background-color: #948b7e;
+  margin: 12px;
+  border: none;
+  padding: 20px;
+  text-align: center;
+  width: 325px;
+  margin-bottom: 0%;
+  font-weight: bold;
+}
+
+.basketbutton:hover{
+  opacity: 0.7;
+}
+.removebutton{
+  color: rgb(192, 20, 20);
+  background-color:#e3dfda;
+  margin: 12px;
+  padding: 20px;
+  text-align: center;
+  width: 325px;
+  border: none;
+  margin-top: 0px;
+
+}
+.removebutton:hover{
+  text-decoration: underline;
+}
+.itemdiv{
+  width: 330px;
+text-align: center;
+padding: 10px;
+}
+.logo{
+  margin: 10px;
+  margin-left: 50px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+  padding: 0%;
+  width:90px;
+  border-radius: 50%;
+  
+}
+
+header {
+    display: flex;
+    align-items: left;
+    padding: 10px ;
+    padding-top: 0px;
+    background-color:#C9C0B3;
+    height: 100px;
+    width: 100%;
+}
+
+.brandname{
+  margin-top: 40px;
+}
+.title{
+  margin:5px;
+}
+
+#carticon{
+  margin-top: 40px;
+  margin-left: 950px;
+  font-size: 25px;
+
+}
+#homeicon{
+
+  margin-top: 40px;
+  margin-left: 20px;
+  font-size: 25px;
+
+}

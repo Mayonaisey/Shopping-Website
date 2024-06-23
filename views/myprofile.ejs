@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+  <title>TRENDISTA</title>
+  <link rel="stylesheet" href="/css/myprofile.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+  <header>
+
+    <img src="images\logo.jpg" class="logo">
+
+    <h2 class="brandname"> Trendista </h2>
+
+   <a href="../Cart/cartWeb.html"> <i class="fa-solid fa-cart-shopping" id="carticon"style="color: black;"></i></a>
+   <a href="home.html"> <i class="fa-solid fa-house-chimney"  id="homeicon"style="color: black;"></i></a>
+
+
+  </header>
+
+  <div class="main">
+    <div class="rightside">
+      <div class="upperright">
+
+        <p class="p1"> WELCOME ,<span id="welcomeuser"></span>! </p>
+      </div>
+      
+      <div class="lowerright">
+
+        <div class="two">
+
+          <!-- <a href="#" onclick="loadPage('wishlist.html', 'leftside')"> -->
+           <a href="#" onclick="openwishlist()"> 
+
+            <i class="fa-solid fa-heart" style="color: black;"></i>
+
+            <span class="text"> MY WISHLIST</span>
+          </a>
+        </div>
+
+        <br>
+
+        <div class="three">
+          <hr>
+
+          <a href="#" onclick="openorder()"> 
+
+          <!-- <a href="#" onclick="loadPage('orders.html', 'leftside')"> -->
+            <!--          <img src="ordericon4.png" class="accounticon"> -->
+            <i class="fa-solid fa-cart-shopping" style="color:black;"></i>
+            <span class="text"> ORDERS </span>
+          </a>
+        </div>
+        <br>
+
+        <div class="four">
+          <hr>
+          <a href="#" onclick="opencontact()"> 
+
+          <!-- <a href="#" onclick="loadPage('contactus.html', 'leftside')"> -->
+            <!--          <img src="contacticon.png" class="accounticon"> -->
+            <i class="fa-solid fa-phone" style="color: black;"></i>
+            <span class="text"> CONTACT US </span>
+          </a>
+        </div>
+
+        <div class="five">
+          <hr>
+          <a href="#" onclick="openedit()"> 
+
+          <!-- <a href="#" onclick="loadPage('edit.html', 'leftside')"> -->
+            <i class="fa-solid fa-pen-to-square" style="color:black;"></i>
+            <span class="text"> EDIT INFO </span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="leftside" id="leftside">
+
+<!-- Personal-info Div -->
+<div class="personal-info" id="personal-info">
+  <h1>Welcome, <span id="userFullName">User</span>!</h1>
+  <div class="info-item">
+    <span class="label">Email:</span>
+    <span class="value" id="userEmail">user@example.com</span>
+  </div>
+  <div class="info-item">
+    <span class="label">Phone Number:</span>
+    <span class="value" id="userPhoneNumber">1234567890</span>
+  </div>
+  <div class="info-item">
+    <span class="label">City:</span>
+    <span class="value" id="userCity">country</span>
+  </div>
+  
+</div>
+
+      <!-- wishdiv -->
+
+      <div class="wishdiv" id="wishdiv"> 
+        <div class="wishsora">
+      <img src="zahapics/emptywish.png" class="image">
+    </div>
+    
+    <div class="wishkalam">
+    
+      <h1> <br>Your Wishlist Is Empty ! </h1>
+      <span class="smalltext">  <h5> You haven’t added any products to your wishlist yet.</h5></span>
+      <button ><a  class="buttontext" href="productsPage.html" >Start Shopping </a></button>
+    </div>
+    
+    </div>
+
+
+<!-- orderdiv -->
+
+
+    <div class="orderdiv" id="orderdiv"> 
+      <div class="ordersora">
+    <img src="zahapics/images.jpg" class="image">
+  </div>
+  <div class="orderkalam">
+  
+    <h1> <br> There is no order yet ! </h1>
+    <span class="smalltext">  <h5> You haven't ordered any products yet.</h5></span>
+    <button ><a class="buttontext"  href="home.html" target="_blank">Add your first order now</a> </button>
+  </div>
+  </div>
+
+
+
+  <!-- contactdiv -->
+
+  
+    <div  class="contactdiv" id="contactdiv">
+      <div  >
+
+        <form>
+  
+          <h1> CONTACT US BY SENDING YOUR :</h1>
+          <hr>
+          <label for="email"> email :</label>
+          <input id="email" type="email" required>
+          <br>
+          <label for="number"> Phone Number: </label>
+          <input  id="number" type="tel" pattern="0(10|11|12|15)\d{8}" required  title="phone number not valid. ">
+  
+          <label for="message"> Your message:</label>
+          <input id="message" type="text" required>
+          <input id="send" type="submit" value="Send">
+        </form>
+
+        <img  width="224" height="200" src="https://sleeknotecom.wpenginepowered.com/wp-content/uploads/2023/11/image-4-1024x1024.png.webp"  >
+
+        <p class="kalamtaht">If you need any assistance, please don't hesitate to <a class="contact"
+            href="https://www.facebook.com/">contact us</a>. Our customer support team is here to help  <a class="links" href="https://www.facebook.com/"> <i class="fa-brands fa-facebook"></i></a>
+  
+            <a class="links" href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a> .
+          </p>
+  
+      </div>
+    </div>
+  
+
+    <!-- editdiv -->
+
+    <div class="editdiv" id="editdiv">
+      <div class="container">
+          <div class="eachline">
+              <label for="newusername">UserName:</label>
+              <input type="text" id='newusername' name="newFullname">
+          </div>
+
+          <div class="eachline">
+              <label for="newemail">Email:</label>
+              <input type="text"id='newemail' name="email">
+
+          </div>
+
+          <div class="eachline">
+            <label for="newpassword">Create Password:</label>
+            <input type="text" id="newpassword" name="newPassword">
+          </div>
+    
+          <div class="eachline">
+            <label for="newnumber">Phone Number:</label>
+            <input type="tel" id="newnumber" name="newPhoneNumber" pattern="0(10|11|12|15)\d{8}" required title="Enter valid phone number">
+          </div>
+    
+          <div class="eachline">
+            <label for="newcountry">City:</label>
+            <input type="text" id="newcountry" name="newCity">
+          </div>
+    
+          <div class="eachline">
+            <label for="newaddress">Address:</label>
+            <input type="text" id="newaddress" name="newAddress">
+
+          </div>
+
+          <div class="eachline">
+            <label for="newdetails">Location Details:</label>
+            <input type="text" id="newdetails" class="editinput" name="newLocationDetails">
+          </div>
+
+          <button class="view" onclick="View()">View Your Details</button>
+      <button id="saveButton" class="save" onclick="save()">Save</button>
+      <button id="deleteButton" class="delete" onclick="deleteAccount()">Delete Account</button>
+          
+
+      </div>
+  </div>
+
+    
+    </div>
+  </div>
+
+  
+<!-- mafrood dah el footer akhdah mn hagar-->
+<div class="div-buttom">
+  <div class="alldiv help">
+      <h3>HELP</h3>
+      <p><a href="#contact-us">Contact Us</a></p>
+      <p><a href="#return&changes">Return and Change</a></p>
+      <p><a href="#shipping&delivery">Shipping and Delivery</a></p>
+  </div>
+
+  <div class="alldiv about-us">
+      <h3>ABOUT US</h3>
+      <p><a href="#aboutus">About us</a></p>
+      <p><a href="#CareerOpportunities">Career Opportunities</a></p>
+      <p><a href="#CorporateSupport">corporate Support</a></p>
+  </div>
+
+  <div class="alldiv policies">
+      <h3>POLICIES</h3>
+      <p><a href="#DataPrivacyAndSecurityPolicy">Data Privacy And Security Policy</a></p>
+      <p><a href="#TermsOfUSe">Terms Of Use</a></p>
+  </div>
+
+  <div class="alldiv logo">
+      <h1>TRENDISTA</h1>
+  </div>
+
+</div>
+
+
+<script src="/js/myprofile.js"> </script>
+
+  <script src="/js/js-edit.js"></script>
+  <!--<script src="/js/js-addacc.js"></script>-->
+  <!-- <script src="loadpage.js"></script> -->
+
+  
+</body>
+
+</html>

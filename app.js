@@ -5,14 +5,30 @@ const { body, validationResult } = require('express-validator');
 const multer = require('multer');
 const Product = require('./models/productmodel');
 const User = require('./models/userModel');
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+
 const app = express();
+
+app.use(session({
+  secret: 'some secret',
+  resave: false,
+/*  saveUninitialized: false,//3shan my3melsh session gdeeda m3 kol req
+  cookie: { maxAge: 1800000  //30 mins
+}*/
+
+  saveUninitialized: true,
+  cookie: { secure: false}}
+));
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 
-const port = 3002;
+const port = 3000;
 
 //connect db
 const dbURl = 'mongodb+srv://hagar2204577:R7nULH9qSYkl5otw@hagar.shuywlc.mongodb.net/alldata?retryWrites=true&w=majority';
@@ -27,12 +43,18 @@ mongoose.connect(dbURl, {})
   });
 
 
-//mayaaaa
-const productsRouter=require('./routes/products');
-app.use('/products', productsRouter);
+
+  /////////// Authentication middleware
+function isAuthenticated(req, res, next) {
+  if (req.session.authenticated) {
+    return next();
+  }
+  res.redirect('/'); 
+}
+
 
 // Routes
-app.get('/', (req, res) => {
+app.get('/dashboard', (req, res) => {
   res.redirect('/dashboard');
 });
 
@@ -245,7 +267,7 @@ app.post('/adminuser',
         city,
         address,
         locationDetails,
-        password,
+        password:hashedPassword,
       });
 
       await newUser.save();
@@ -320,3 +342,188 @@ app.get('/deleteuser/:id', async (req, res) => {
     res.status(500).send('Error deleting user: ' + err.message);
   }
 });
+
+///////////////////// zahaa //////////////////////////
+
+app.get('/', (req, res) => {
+  res.render('accountForm');
+});
+
+app.get('/insidewishlist',isAuthenticated, (req, res) => {
+  res.render('insidewishlist');
+});
+
+app.get('/myprofile',isAuthenticated,(req, res) => {
+  res.render('myprofile');
+});
+
+
+ 
+// Sign up 
+app.post('/signup', async (req, res) => {
+  try {
+    const { fullname, phoneNumber, city, address, locationDetails, email, password } = req.body;
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      console.log('user exists');
+      return res.status(400).json({ message: 'User already exists' });
+    }
+    console.log('user doesnot exist');
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+
+    const newuser = new User({
+      fullname,
+      email,
+      phoneNumber,
+      city,
+      address,
+      locationDetails,
+      password: hashedPassword, 
+    });
+
+    await newuser.save();
+    console.log('new user created ');
+   
+    ///////Initialize session
+    req.session.userId = newuser._id;
+    req.session.authenticated = true;
+console.log('session intialized');
+    
+    res.redirect('/myprofile');
+
+
+  } catch (err) {
+    console.error('Error during signup:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+  
+
+
+
+// Sign in 
+app.post('/signin', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    console.log("email: ${email} and pass: ${password}");
+
+   const user = await User.findOne({ email });
+
+    if (!user) {
+      console.log('no user found');
+  return res.status(400).json({ message: 'invalid Email or password ' });
+    }
+    console.log('user found');
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      console.log('passw wrong');
+
+      return res.status(400).json({ message: 'invalid email or Password' });
+    }
+
+   ///// Initialize session
+   req.session.userId = user._id;
+   req.session.authenticated = true;
+   console.log('session intialized');
+
+   res.redirect('/myprofile');
+
+
+
+  }catch (error) {
+    console.error('Error during signin:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+
+// Get user details based on current session
+app.get('/user', isAuthenticated, async (req, res) => {
+  try {
+    const userId = req.session.userId;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({
+      fullname: user.fullname,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      city: user.city,
+      address: user.address,
+      locationDetails: user.locationDetails
+    });
+
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+///// i donot  need this bec we are already in a session
+/*
+//to get user data from the db first 
+app.get('/user/:email', async (req, res) => {
+  try {
+    const email = req.params.email;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});*/
+
+app.put('/update', isAuthenticated, async (req, res) => {
+  try {
+    const userId = req.session.userId;
+
+    const { newemail, newFullname, newPhoneNumber, newCity, newAddress, newLocationDetails, newPassword } = req.body;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    if (newemail) user.email = email;
+    if (newFullname) user.fullname = newFullname;
+    if (newPassword) user.password = await bcrypt.hash(newPassword, 10); 
+    if (newPhoneNumber) user.phoneNumber = newPhoneNumber;
+    if (newCity) user.city = newCity;
+    if (newAddress) user.address = newAddress;
+    if (newLocationDetails) user.locationDetails = newLocationDetails
+    await user.save();
+
+console.log('User updated successfully');
+
+  
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+
+//lw user 3ayz y delete his acc 
+app.delete('/delete/:email', isAuthenticated, async (req, res) => {
+  try {
+    const email = req.params.email;
+    const user = await User.findOneAndDelete({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'user not found' });
+    }
+    res.status(200).json({ message: 'user deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+
+  <title>Sign In / Log In Form</title>
+  
+  <link rel="stylesheet" href="/css/accountForm.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+
+  <header>
+
+    <img src="images\logo.jpg" class="logo">
+
+    <h2 class="brandname"> Trendista </h2>
+
+    <a href="../Cart/cartWeb.html"> <i class="fa-solid fa-cart-shopping" id="carticon" style="color: black;"></i></a>
+    <a href="home.html"> <i class="fa-solid fa-house-chimney" id="homeicon" style="color: black;"></i></a>
+
+
+  </header>
+
+
+  <section id="innersection" class="innersection">
+
+    <img src="images\logo.jpg" class="smalllogo">
+
+    <h2>Welcome back</h2>
+    <h5> Please enter your details to sign in.</h5>
+
+    <form id="signinform" class="signinform" onsubmit="return validateForm(event)" action="/signin" method="POST">
+
+      <input id="signemail" name="email" type="email" placeholder="Enter your email..." required>
+
+      <br>
+      <input id="signpassword" name="password" type="password" placeholder="Enter your password.." required pattern=".{8,}"
+        title="Eight or more characters">
+
+      <br>
+
+      <button type="submit">Sign in</button>
+
+      <button id="usersButton" type="button"><a href="adminuser.html">Users</a> </button>
+      <button id="itemsButton" type="button"> <a href="adminchange.html"> Items</a> </button>
+      <p style="color: #948b7e;"> Don't have an account yet? <a class="switchToLogin" onclick="appearlogin()">Sign
+          Up</a></p>
+
+    </form>
+    </div>
+
+    <!--------------------------------------------------------------------------------------------------------------------------------------->
+
+    <div id="loginForm" class="loginform">
+
+      <h2>Login loginform</h2>
+      <form id="logform" class="logform" onsubmit=" return validateForm(event)" action="/signup" method="POST">
+
+        <input type="text" name="fullname" id="username" required placeholder="Full name">
+        <input type="tel"  name="phoneNumber" id="number" placeholder="Enter phone number..." required pattern="0(10|11|12|15)\d{8}"
+          title="Enter valid phone number">
+        <br>
+
+        <input type="text" name="city" id="country" required placeholder="City (e.g., Cairo/Giza)">
+
+        <input type="text"name="address" id="Address" required placeholder="Address">
+        <br>
+
+        <input type="text" name="locationDetails" id="details" placeholder="Location Details">
+
+        <input type="email"  name="email" id="email" required placeholder="Email">
+        <br>
+
+        <input type="password" name="password" id="password" placeholder=" Enter new password" required
+          pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}"
+          title="Must contain at least one uppercase and lowercase letter, and at least 8 characters">
+
+
+        <input id="password2" type="password" placeholder="Confirm password *" required pattern=".{8,}"
+          title="Eight or more characters">
+
+        <br>
+        <p id="passmessage"></p>
+
+        <input id="checkbox" type="checkbox" required>
+        <label for="checkbox"><a href="termsandconditions.com"> i agree to the terms and conditions.</a> </label>
+
+        <br>
+        <button type="submit" target="/dashboard.ejs">Login</button>
+        <br>
+        <p style="color: #948b7e;"> Already have an account? <a class="switchToSignUp" onclick="appearsignin()">Sign
+            in.</a></p>
+
+      </form>
+    </div>
+    <div id="signinForm" class="formmm">
+
+  </section>
+
+
+  <!-- mafrood dah el footer akhdah mn hagar-->
+  <div class="div-buttom">
+    <div class="alldiv help">
+      <h3>HELP</h3>
+      <p><a href="#contact-us">Contact Us</a></p>
+      <p><a href="#return&changes">Return and Change</a></p>
+      <p><a href="#shipping&delivery">Shipping and Delivery</a></p>
+    </div>
+
+    <div class="alldiv about-us">
+      <h3>ABOUT US</h3>
+      <p><a href="#aboutus">About us</a></p>
+      <p><a href="#CareerOpportunities">Career Opportunities</a></p>
+      <p><a href="#CorporateSupport">corporate Support</a></p>
+    </div>
+
+    <div class="alldiv policies">
+      <h3>POLICIES</h3>
+      <p><a href="#DataPrivacyAndSecurityPolicy">Data Privacy And Security Policy</a></p>
+      <p><a href="#TermsOfUSe">Terms Of Use</a></p>
+    </div>
+
+    <div class="alldiv logo">
+      <h1>TRENDISTA</h1>
+    </div>
+
+  </div>
+  <script>function appearlogin() {
+    document.getElementById('innersection').style.transform = 'rotateY(360deg)';
+  
+    document.getElementById('signinForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+  };
+  
+  
+  function appearsignin() {
+  
+    document.getElementById('innersection').style.transform = 'rotateY(360deg)';
+  
+    document.getElementById('loginForm').style.display = 'none';
+    // document.getElementById('signinForm').style.display = 'block';
+  };
+  </script>
+  <!--script src="accountForm.js"> </script>-->
+
+  <script src="js-addacc.js"></script>
+  <script src="signin.js"></script>
+  <script src="js-edit.js"></script>
+
+</body>
+
+</html>
