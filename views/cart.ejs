@@ -13,32 +13,39 @@
   <div class="body">
     <h1 class="head">My Cart </h1>
     <div class="cart">
+      <%if(cart.lenght>0){%>
+        <%cart.forEach(item=>{%>
       <div class="listcart">
         <div class="image">
-          <img src="Cart\dress.png" width="250" height="200">
+          <img src="<%= item.productId.imageUrl %>" width="250" height="200">
         </div>
 
         <div class="cart-info">
-          <div class="name">Square Collar Women's Dress </div><br>
-          <div class="code">code</div>
+          <div class="name"><%=item.productId.name%> </div><br>
+          <div class="code">Product code:<%=item.productId._id%></div>
           <br><br>
           <div class="size">size: M</div>
         </div>
 
         <div class="quan">
           <button class="min">-</button>
-          <input class="qy" type="text" value="1" readonly>
+          <input class="qy" type="text" value="<%=item.quantity%>" readonly>
           <button class="plus">+</button>
         </div>
 
         <div class="s">
-          <input class="pr" type="text" value="1349.10 EGP" readonly><br><br>
+          <input class="pr" type="text" value="<%= item.productId.price * item.quantity).toFixed(2) %> EGP" readonly><br><br>
           <span>
+            <form action="/cart/remove/<%item.productId._id%>" method="post">
             <button class="delete">d</button>
+            </form>
             <button id="wishlist">w</button>
           </span>
         </div>
       </div>
+      <%});%>
+
+      <%}>
       <div class="total-price">
         <h2>Order Summary</h2>
         <table>
@@ -47,7 +54,7 @@
             <td></td>
             <td class="right">
               <div class="total">
-                <input id="Tprice" type="text" value="" readonly>
+                <input id="Tprice" type="text" value="<%= cart.reduce((total, item) => total + item.productId.price * item.quantity, 0) %>  EGP" readonly>
               </div>
             </td>
           </tr>
@@ -65,7 +72,7 @@
             <td></td>
             <td class="right">
               <div class="grand-total">
-                <input id="grand" type="text" value="" readonly>
+                <input id="grand" type="text" value="<%= (cart.reduce((total, item) => total + item.productId.price * item.quantity, 0) * 0.9).toFixed(2) %> EGP "readonly>
               </div>
             </td>
           </tr>

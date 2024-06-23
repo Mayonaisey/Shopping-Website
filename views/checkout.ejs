@@ -11,31 +11,34 @@
     <div class="data">
         <h2>Address Info:</h2>
           <label for="City">City:</label>
-         <input type="text" name="city" id="City" readonly>
+         <input type="text" name="city" id="City"value="<%user.city%>" readonly>
          <div id="cityError" class="error"></div><br><br>
 
          <div class="row">
          <label for="st">Street Info:</label>
-         <input type="text" name="street" id="st" readonly>
+         <input type="text" name="street" id="st" value="<%user.locationDetails%>" readonly>
          <div id="streetError" class="error"></div>
          </div>
          
          <h2 >Personal Info:</h2>
          <label for="Name">Name:</label>
-         <input type="text" name="name" id="Name" readonly>
+         <input type="text" name="name" id="Name" value="<%user.fullname%>" readonly>
          <div id="nameError" class="error"></div>
          <br><br>
          <label for="Phone">Phone number:</label>
-         <input  type="text" name="phone" id="Phone" readonly>
+         <input  type="text" name="phone" id="Phone" value="<%user.phoneNumber%>" readonly>
          <div id="phoneError" class="error"></div>
          <br><br>
-         <button onclick="dispaly()">view</button>
+        <!-- <button onclick="dispaly()">view</button>-->
+        
        <div class="TotalPrice">
        <label for="lb" >Total Price:</label>
-       <input type="text" class="total" id="to" value="10000.0 EGP" readonly>
+       <input type="text" class="total" id="to" value="<%= totalPrice %> EGP" readonly>
        </div>
        <br><br>
-      <a href="continue.ejs"><input  id="bt" value="Place Order"></a>
+       <form action="/checkout/placeOrder" method="POST">
+      <a href="./continue.ejs"><input  type="submit" id="bt" value="Place Order"></a>
+    </form>
     </div>
 </div>
     <script src="checkout.js"></script>
