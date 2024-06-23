@@ -52,4 +52,7 @@ const productSchema = new mongoose.Schema({
 
 const Product = mongoose.model("Productmodel", productSchema);
 
+exports.getProductById = (id) => {
+  return Product.find(product => product.id == id);
+};
 module.exports = Product;

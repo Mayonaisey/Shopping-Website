@@ -33,6 +33,7 @@ function displayProduct() {
     openprod = 0;
   }
 }
+
 const productContainer = document.getElementById("product-container");
 
 const searchInput = document.getElementById("search-bar");

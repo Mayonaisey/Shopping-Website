@@ -6,37 +6,12 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>SEJAL.com</title>
-      <link rel="stylesheet" href="../public/css/productsStyle.css" />
+      <link rel="stylesheet" href="./css/productsStyle.css" />
+      <link rel="stylesheet" href="./css/nav&footerStyle.css" />
       <script src="https://kit.fontawesome.com/69992cfeb0.js"></script>
     </head>
     <body>
-      <header>
-        <h1> <a href="home.html" id="website-name"> SEJAL </a></h1>
-        <a href="home.html"><img src="images\logo.jpg" class="logo" alt="cannot load pic" width="50px"></a>
-        <div class="search-container">
-            <input id="search-bar" type="text" placeholder="Search..." >
-            <button class="bt">
-              <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </div>
-        <div class="icons">
-            <div class="icon-container">
-               <a href="myprofile.html"> <i class="fas fa-user"></i></a>
-                <div class="user-box">
-                    <p>Log in to enjoy special offers for members and fast checkout.</p>
-                    <button class="user-btn login-btn"><a href="signin.html">Log In</a></button>
-                    <button class="user-btn signup-btn"><a href="addaccount.html">create account</a></button>
-                </div>
-            </div>
-            <a href="itemsinwishlist.html" target="_blank">
-                <i class="far fa-heart"></i>
-            </a>
-            <a href="../Cart/cartWeb.html" target="_blank" class="icon-Cart">  
-                          <i class="fas fa-shopping-cart"></i><span id="Cart-Quantity">0</span></i></a>
-        </div>
-    </header>
-    <script src="cart.js"></script>  
-    <script src="../public/js/products.js"></script>  
+        <%- include('./partials/nav'); %>
    <div id="fullpage">
     <div id="page">
      <div class="sidebar">
@@ -85,47 +60,21 @@
              <div class="producttxt"><h1>Products</h1></div>
              <div id="product-container">
                 <% products.forEach((product)=>{ %>
-                    <button class="card" onclick="showItem(product)">
+                    <a class="card" href="/products/:<%= product.id %>">
                         <img src=<%= product.image1 %> class="img">
                         <span class="tooltiptext"><%= product.name %></span>
                         <p class="text"><%= product.name %></p>
                         <p class="price">Price: <%= product.price %> EGP</p>
                         <!-- <p class="sizes">Sizes: <%= product.size.join(", ") %></p> -->
-                    </button>
+                    </a>
                 <% })%>
              </div>
           </section>
-    </div><!--close tag for page-->
-
-          <div class="div-buttom">
-            <div class="alldiv help">
-                <h3>HELP</h3>
-                <p><a href="#contact-us">Contact Us</a></p>
-                <p><a href="#return&changes">Return and Change</a></p>
-                <p><a href="#shipping&delivery">Shipping and Delivery</a></p>
-            </div>
-    
-            <div class="alldiv about-us">
-                <h3>ABOUT US</h3>
-                <p><a href="#aboutus">About us</a></p>
-                <p><a href="#CareerOpportunities">Career Opportunities</a></p>
-                <p><a href="#CorporateSupport">corporate Support</a></p>
-            </div>
-    
-            <div class="alldiv policies">
-                <h3>POLICIES</h3>
-                <p><a href="#DataPrivacyAndSecurityPolicy">Data Privacy And Security Policy</a></p>
-                <p><a href="#TermsOfUSe">Terms Of Use</a></p>
-            </div>
-    
-            <div class="alldiv logo">
-                <h1>SEJAL</h1>
-            </div>
-    
-        </div>
+        </div><!--close tag for page-->
+            <%- include('./partials/footer'); -%>
    </div> <!--close tag for fullpage-->
-
-
+   <script src="./js/cart.js"></script>  
+   <script src="./js/products.js"></script>
   </body>
   </html>
 
