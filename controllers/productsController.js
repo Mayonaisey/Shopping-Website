@@ -3,8 +3,22 @@ const Product=require('../models/productmodel');
 
 
 exports.getProducts=async(req, res)=>{
-    const products= await Product.find();
-    res.render('products', {products});
+    try {
+        const products = await Product.find({});
+        res.render('products', { products });
+      } catch (err) {
+        res.status(500).send('Error fetching products');
+      }
+};
+
+exports.showProduct = (req, res) => {
+  const productId = req.params.id;
+  const product = Product.findById(productId);
+  if (product) {
+      res.render('showProduct', { item: product });
+  } else {
+      res.status(404).send('Product not found');
+  }
 };
 
 //hena 3shan a filter through el chosen gender, type... 

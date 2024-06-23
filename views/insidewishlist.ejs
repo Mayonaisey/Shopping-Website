@@ -10,18 +10,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   </head>
   <body>
-    <header>
-
-      <img src="images\logo.jpg" class="logo" >
-  
-      <h2 class="brandname"> Trendista </h2>
-
-      <a href="../Cart/cartWeb.html"> <i class="fa-solid fa-cart-shopping" id="carticon"style="color: black;"></i></a>
-      <a href="home.html"> <i class="fa-solid fa-house-chimney"  id="homeicon"style="color: black;"></i></a>
-      <a href="myprofile.html"><i class="fa-solid fa-user" id="homeicon"style="color: black;"></i></a>
-         
-      
-    </header>
+    <%- include('./partials/nav'); %>
 <div class="main">
 
     <div class="titlediv">
@@ -68,5 +57,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     </div>
   </div>
+  <%- include('./partials/footer'); -%>
+
   </body>
 </html>
