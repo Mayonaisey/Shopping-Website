@@ -99,9 +99,9 @@
         <tbody>
             <% products.forEach(product=> { %>
                 <tr>
-                    <td><img src="<%=product.image1 %>" alt="Product Image 1"></td>
-                    <td><img src="<%= product.image2 %>" alt="Product Image 2"></td>
-                    <td><img src="<%= product.image3 %>" alt="Product Image 3"></td>
+                    <td><img src="/images/db/<%=product.image1 %>" alt="Product Image 1"></td>
+                    <td><img src="/images/db/<%= product.image2 %>" alt="Product Image 2"></td>
+                    <td><img src="/images/db/<%= product.image3 %>" alt="Product Image 3"></td>
                     <td>
                         <%= product.name %>
                     </td>

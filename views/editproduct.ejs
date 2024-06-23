@@ -3,156 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Product</title>
-    <link rel="stylesheet" href="/css/edit.css">
+    <link rel="stylesheet" href="./css/adminchanges.css">
 </head>
 <body>
-    <header>
+    <header class="header">
         <h1>Edit Product</h1>
     </header>
-    <div id="errorContainer" class="error-container"></div> 
-    <form id="editUserForm" action="/edit/<%= product._id %>" method="post" enctype="multipart/form-data">
-        <fieldset>
-            <legend>Product Images</legend>
-
-            <label for="image1">Product Image 1:</label>
-            <input type="file" id="image1" name="image1" accept="image/*">
-            <% if (product.image1) { %>
-                <img src="<%= product.image1 %>" alt="Product Image 1" width="100">
-                <input type="hidden" name="existingImage1" value="<%= product.image1 %>">
-            <% } %>
-            <br>
-
-            <label for="image2">Product Image 2:</label>
-            <input type="file" id="image2" name="image2" accept="image/*">
-            <% if (product.image2) { %>
-                <img src="<%= product.image2 %>" alt="Product Image 2" width="100">
-                <input type="hidden" name="existingImage2" value="<%= product.image2 %>">
-            <% } %>
-            <br>
-
-            <label for="image3">Product Image 3:</label>
-            <input type="file" id="image3" name="image3" accept="image/*">
-            <% if (product.image3) { %>
-                <img src="<%= product.image3 %>" alt="Product Image 3" width="100">
-                <input type="hidden" name="existingImage3" value="<%= product.image3 %>">
-            <% } %>
-            <br>
-        </fieldset>
-
-       
-        <fieldset>
-            <legend>Product Details</legend>
-
-            <label for="name">Product Name:</label>
-            <input type="text" id="name" name="name" value="<%= product.name %>"><br>
-
-            <label for="type">Product Type:</label>
-            <input type="text" id="type" name="type" value="<%= product.type %>"><br>
-
-            <label for="price">Product Price:</label>
-            <input type="text" id="price" name="price" value="<%= product.price %>"><br>
-
-            <label for="description">Product Description:</label>
-            <input type="text" id="description" name="description" value="<%= product.description %>"><br>
-
-            <% function getProductQuantity(sizesArray, size) { %>
-                <% const foundSize = sizesArray.find(s => s.size === size); %>
-                <% return foundSize ? foundSize.quantity : 0; %>
-            <% } %>
-            
-            <fieldset>
-                <legend>Product Sizes and Quantities:</legend>
+    <div class="form-container">
+        <form id="editProductForm" action="/edit/<%= product._id %>" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="image1">Product Image 1:</label>
+                <input type="file" id="image1" name="image1" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="image2">Product Image 2:</label>
+                <input type="file" id="image2" name="image2" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="image3">Product Image 3:</label>
+                <input type="file" id="image3" name="image3" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="name">Product Name:</label>
+                <input type="text" id="name" name="name" value="<%= product.name %>">
+            </div>
+            <div class="form-group">
+                <label for="type">Product Type:</label>
+                <input type="text" id="type" name="type" value="<%= product.type %>">
+            </div>
+            <div class="form-group">
+                <label for="price">Product Price:</label>
+                <input type="text" id="price" name="price" value="<%= product.price %>">
+            </div>
+            <div class="form-group">
+                <label for="description">Product Description:</label>
+                <textarea id="description" name="description"><%= product.description %></textarea>
+            </div>
+            <div class="form-group" style="display: flex;">
+                <label>Product Size:</label><br>
+                <% const sizes = ['XS', 'S', 'M', 'L', 'XL', '2XL']; %>
                 <% sizes.forEach(size => { %>
-                    <div>
-                        <input type="checkbox" id="size_<%= size %>" name="sizes" value="<%= size %>"
-                               <% if (product.sizes.some(s => s.size === size)) { %> checked <% } %>>
-                        <label for="size_<%= size %>"><%= size %></label>
-                        <input type="number" id="quantity_<%= size %>" name="quantities" min="0"
-                               value="<%= getProductQuantity(product.sizes, size) %>">
-                    </div>
+                    <input type="checkbox" id="size<%= size %>" name="sizes[]" value="<%= size %>" <% if (product.sizes.some(s => s.size === size)) { %>checked<% } %> >
+                    <label for="size<%= size %>"><%= size %></label><br>
                 <% }); %>
-            </fieldset>
-            
-            
-            
-        </fieldset>
-
-        
-        <button type="submit">Update Product</button>
-    </form>
-    
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('editUserForm').addEventListener('submit', function (event) {
-            event.preventDefault(); 
-    
-            
-            const errorContainer = document.getElementById('errorContainer');
-            errorContainer.innerHTML = '';
-    
-            
-            let valid = true;
-            const formData = new FormData(this);
-    
-            const name = formData.get('name').trim();
-            const type = formData.get('type').trim();
-            const price = formData.get('price').trim();
-            const description = formData.get('description').trim();
-            const sizes = formData.getAll('sizes'); // Get all selected sizes
-            const quantities = formData.getAll('quantities'); // Get all quantities
-            let sizeObj = []
-    
-            
-            const lettersOnlyPattern = /^[A-Za-z]+$/;
-    
-            if (!name) {
-               alert("name is req")
-                valid = false;
-            } 
-    
-            if (!type) {
-               alert("Product Type is required")
-                valid = false;
-            } else if (!lettersOnlyPattern.test(type)) {
-               alert("Product Type must contain letters only")
-                valid = false;
-            }
-    
-            if (!price || isNaN(price) || parseFloat(price) <= 0) {
-                alert("Product Price must be a positive number")
-                valid = false;
-            }
-    
-            if (!description) {
-                 alert("Product Description is required")
-                valid = false;
-            }
-            for (const size of sizes){
-                const quantityElement = document.getElementById(`quantity_${size}`)
-                const quantity = quantityElement ? quantityElement.value : null;
-
-                if (!quantity){
-                    alert('Sizes and quantities must be of the same length. or might assigned in wrong order');
-                    valid = false;
-                    break;
-                }
-                else if (!Number.isInteger(parseInt(quantity, 10)) || parseInt(quantity, 10) <= 0) {
-                        alert('Quantities must be positive integers.');
-                        valid = false;
-                        break
-                    }
-                else 
-                    sizeObj.push({"size": size, "quantity": quantity})
-            }
-    
-            if (valid) {
-                alert("add done")
-                // event.target.submit();
-            } else {
-                alert(errorMessage);
-            }
-        });
-    });
-    </script>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Product Quantity:</label>
+                <input type="text" id="quantity" name="quantities" value="<%= product.sizes.map(s => s.quantity).join(', ') %>">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update Product">
+            </div>
+        </form>
+    </div>
 </body>
 </html>
