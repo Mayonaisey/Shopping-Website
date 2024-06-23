@@ -1,0 +1,251 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  line-height: 1.4;
+  color: #e5e5e5;
+  background-color: rgb(64, 16, 72);
+}
+
+.innersection {
+background-color: rgb(93, 58, 100);
+width: 80%; /* Relative width */
+max-width: 400px; /* Maximum width */
+height: auto; /* Height adjusts to content */
+margin: 100px auto; /* Centering the section */
+position: relative;
+transition: transform 0.5s;
+}
+
+@media (max-width: 600px) {
+.innersection {
+width: 100%;
+margin-top: 20px;
+margin-bottom: 20px;
+}
+body{
+width: 100%;
+
+}
+header{
+    width: 100%;
+
+}
+}
+
+button {
+width: 50%;
+margin: 10px 0;
+padding: 8px; 
+}
+
+
+input[type="email"], input[type="password"]{
+width: 50%; 
+margin-bottom:7px;
+padding: 8px;
+
+}
+
+a {
+  cursor: pointer;
+  color: #0F0F0F;
+  text-decoration: underline;
+  margin-top: 20px;
+}
+
+a:hover {
+  color: #CE4760;
+}
+
+#passmessage {
+  font-size: 15px;
+  margin: 0px;
+  margin-top: 15px;
+  margin-left: 10px;
+  padding: 3px;
+  width: 165px;
+  color: white;
+}
+
+#usersButton,
+#itemsButton {
+  display: none;
+}
+
+#usersButton,
+#itemsButton {
+  background-color: black;
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 0px;
+
+  width: 100px;
+
+}
+
+#usersButton a,
+#itemsButton a {
+  color: white;
+  text-decoration: none;
+}
+
+button[type="submit"] {
+  background-color: black;
+  color: white;
+  padding: 8px;
+  margin-top: 3px;
+  margin-bottom: 0px;
+  width: 100px;
+
+}
+
+button[type="submit"]:hover {
+  background-color: white;
+  color: black;
+
+}
+
+
+/* dah el style bta3 el footer */
+
+.div-buttom {
+  display: flex;
+  margin-top: 40px;
+  background-color: rgb(212, 211, 211);
+}
+
+.div-buttom .alldiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+  height: 170px;
+  margin-bottom: 10px;
+}
+
+.div-buttom .alldiv p {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.div-buttom .alldiv a {
+  text-decoration: none;
+  color: gray;
+
+}
+
+#carticon {
+  margin-top: 40px;
+  margin-left: 980px;
+  font-size: 25px;
+
+}
+
+#homeicon {
+
+  margin-top: 40px;
+  margin-left: 20px;
+  font-size: 25px;
+}
+
+
+.logo {
+  margin: 10px;
+  margin-left: 80px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+  padding: 0%;
+  width: 90px;
+  border-radius: 50%;
+  color: #0F0F0F;
+
+}
+
+header {
+  display: flex;
+  align-items: left;
+  padding: 10px;
+  background-color: rgb(139, 106, 145);
+  height: 100px;
+
+}
+
+.brandname {
+  margin-top: 40px;
+}
+
+form {
+  color: #0F0F0F;
+  
+}
+
+.innersection h2 {
+  color: #0F0F0F;
+  margin-left: 115px;
+  margin-bottom: 0px;
+  padding-top: 10px;
+}
+
+.innersection h5 {
+  color: #948b7e;
+  margin-top: 0px;
+  margin-bottom: 40px;
+
+  margin-left: 95px;
+  font-weight: 300;
+
+}
+
+.smalllogo {
+  margin: 10px;
+  margin-left: 170px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+  margin-top: 20px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+
+}
+
+.signinform {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.loginform {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  display: none;
+  padding-left: 10px;
+}
+
+
+#signemail,
+#signpassword {
+  padding: 6px;
+  border-radius: 8px;
+}
+
+
+#logform input {
+  padding: 6px;
+  margin: 5px;
+  border-radius: 8px;
+
+}
+
+.logform {
+
+  margin-top: 40px;
+}

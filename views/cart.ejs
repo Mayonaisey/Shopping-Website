@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="/css/cart.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+  <div class="body">
+    <h1 class="head">My Cart </h1>
+    <div class="cart">
+      <div class="listcart">
+        <div class="image">
+          <img src="Cart\dress.png" width="250" height="200">
+        </div>
+
+        <div class="cart-info">
+          <div class="name">Square Collar Women's Dress </div><br>
+          <div class="code">code</div>
+          <br><br>
+          <div class="size">size: M</div>
+        </div>
+
+        <div class="quan">
+          <button class="min">-</button>
+          <input class="qy" type="text" value="1" readonly>
+          <button class="plus">+</button>
+        </div>
+
+        <div class="s">
+          <input class="pr" type="text" value="1349.10 EGP" readonly><br><br>
+          <span>
+            <button class="delete">d</button>
+            <button id="wishlist">w</button>
+          </span>
+        </div>
+      </div>
+      <div class="total-price">
+        <h2>Order Summary</h2>
+        <table>
+          <tr>
+            <td class="left">total price</td>
+            <td></td>
+            <td class="right">
+              <div class="total">
+                <input id="Tprice" type="text" value="" readonly>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="left"> Discounts </td>
+            <td></td>
+            <td class="right">
+              <div class="discount">
+                <input id="dis" type="text" value="10%" readonly>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="left">Grand Total</td>
+            <td></td>
+            <td class="right">
+              <div class="grand-total">
+                <input id="grand" type="text" value="" readonly>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <a href="checkout.ejs"><button class="to-checkout" id="bt" onclick="passValue()">Proceed to checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/cart.js"></script>
+
+</body>
+
+</html>
