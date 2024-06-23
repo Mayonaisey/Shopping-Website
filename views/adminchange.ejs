@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Add New Product</title>
     <link rel="stylesheet" href="./css/adminchanges.css">
-    
+
 </head>
+
 <body>
     <header class="header">
         <h1>Add New Product</h1>
@@ -44,32 +46,30 @@
 
             <div class="form-group">
                 <label for="description">Product Description:</label>
-                <textarea id="description" name="description" ></textarea>
+                <textarea id="description" name="description"></textarea>
             </div>
 
-            <div class="form-group">
-                <label for="size">Product Size:</label>
-                <select id="size" name="size">
-                    <option value="XS">XS</option>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
-                    <option value="2XL">2XL</option>
-                </select>
+            <div class="form-group" style="display: flex; ">
+                <label>Product Size:</label><br>
+                <input type="checkbox" id="sizeXS" name="sizes[]" value="XS">
+                <label for="sizeXS">XS</label><br>
+                <input type="checkbox" id="sizeS" name="sizes[]" value="S">
+                <label for="sizeS">S</label><br>
+                <input type="checkbox" id="sizeM" name="sizes[]" value="M">
+                <label for="sizeM">M</label><br>
+                <input type="checkbox" id="sizeL" name="sizes[]" value="L">
+                <label for="sizeL">L</label><br>
+                <input type="checkbox" id="sizeXL" name="sizes[]" value="XL">
+                <label for="sizeXL">XL</label><br>
+                <input type="checkbox" id="size2XL" name="sizes[]" value="2XL">
+                <label for="size2XL">2XL</label><br>
             </div>
 
-            <div class="form-group">
-                <label for="gender">Product Gender:</label>
-                <select id="gender" name="gender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-            </div>
 
             <div class="form-group">
                 <label for="quantity">Product Quantity:</label>
-                <input type="text" id="quantity" name="quantity">
+                <input type="text" id="quantity" name="quantities"
+                    placeholder="Enter quantities separated by commas (e.g., 10,20,15)">
             </div>
 
             <div class="form-group">
@@ -80,49 +80,69 @@
     <header class="header">
         <h1>Products List</h1>
     </header>
-    
-        <table class="product-table">
-            <thead>
+
+    <table class="product-table">
+        <thead>
+            <tr>
+                <th>Image 1</th>
+                <th>Image 2</th>
+                <th>Image 3</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Size</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% products.forEach(product=> { %>
                 <tr>
-                    <th>Image 1</th>
-                    <th>Image 2</th>
-                    <th>Image 3</th>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                    <th>Size</th>
-                    <th>Gender</th>
-                    <th>Quantity</th>
-                    <th>Actions</th>
+                    <td><img src="<%=product.image1 %>" alt="Product Image 1"></td>
+                    <td><img src="<%= product.image2 %>" alt="Product Image 2"></td>
+                    <td><img src="<%= product.image3 %>" alt="Product Image 3"></td>
+                    <td>
+                        <%= product.name %>
+                    </td>
+                    <td>
+                        <%= product.type %>
+                    </td>
+                    <td>
+                        <%= product.price.toFixed(2) %>L.E
+                    </td>
+                    <td>
+                        <%= product.description %>
+                    </td>
+                    <td>
+                        <ul>
+                            <% product.sizes.forEach(size => { %>
+                                <li><%= size.size %></li>
+                            <% }); %>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <% product.sizes.forEach(size => { %>
+                                <li><%= size.quantity %></li>
+                            <% }); %>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="/edit/<%= product._id %>" class="action-button"><i class="fas fa-edit"></i> Edit</a>
+                        <a href="/delete/<%= product._id %>"
+                            onclick="return confirm('Are you sure you want to delete this product?')"
+                            class="action-button"><i class="fas fa-trash-alt"></i> Delete</a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                <% products.forEach(product => { %>
-                    <tr>
-                        <td><img src="<%=product.image1 %>" alt="Product Image 1"></td>
-                        <td><img src="<%= product.image2 %>" alt="Product Image 2"></td>
-                        <td><img src="<%= product.image3 %>" alt="Product Image 3"></td>
-                        <td><%= product.name %></td>
-                        <td><%= product.type %></td>
-                        <td><%= product.price.toFixed(2) %>L.E</td>
-                        <td><%= product.description %></td>
-                        <td><%= product.size %></td>
-                        <td><%= product.gender %></td>
-                        <td><%= product.quantity %></td>
-                        <td>
-                            <a href="/edit/<%= product._id %>" class="action-button"><i class="fas fa-edit"></i> Edit</a>
-                            <a href="/delete/<%= product._id %>" onclick="return confirm('Are you sure you want to delete this product?')" class="action-button"><i class="fas fa-trash-alt"></i> Delete</a>
-                        </td>
-                    </tr>
                 <% }); %>
-            </tbody>
-        </table>
-    
+        </tbody>
+    </table>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('newProductForm').addEventListener('submit', function (event) {
-                
+
                 event.preventDefault();
                 let valid = true;
 
@@ -130,16 +150,21 @@
                 const type = document.getElementById('type').value.trim();
                 const price = document.getElementById('price').value.trim();
                 const description = document.getElementById('description').value.trim();
-                const quantity = document.getElementById('quantity').value.trim();
+                const sizes = Array.from(document.querySelectorAll('input[name="sizes[]"]:checked')).map(checkbox => checkbox.value);
+                const quantities = document.getElementById('quantity').value.trim();
 
+                
+                const quantitiesArray = quantities.split(',').map(qty => qty.trim());
+                if (sizes.length !== quantitiesArray.length) {
+                    alert('Sizes and quantities must be of the same length.');
+                    valid = false;
+                }
                 const lettersOnlyPattern = /^[A-Za-z]+$/;
 
                 if (!name) {
                     alert('Product Name is required.');
                     valid = false;
-                } else if (!lettersOnlyPattern.test(name)) {
-                    alert('Product Name must contain letters only.');
-                    valid = false;
+
                 }
 
                 if (!type) {
@@ -161,18 +186,15 @@
                     valid = false;
                 }
 
-                if (!quantity || isNaN(quantity) || parseInt(quantity) <= 0) {
-                    alert('Product Quantity must be a positive integer.');
-                    valid = false;
-                }
                 if (valid) {
-                alert("add done")
-                event.target.submit();
-            } else {
-                alert(errorMessage);
-            }
+                    alert("add done")
+                    event.target.submit();
+                } else {
+                    alert(errorMessage);
+                }
             });
         });
     </script>
 </body>
+
 </html>

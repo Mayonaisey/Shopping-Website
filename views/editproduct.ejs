@@ -55,30 +55,32 @@
             <label for="description">Product Description:</label>
             <input type="text" id="description" name="description" value="<%= product.description %>"><br>
 
-            <label for="size">Product Size:</label>
-            <select id="size" name="size">
-                <option value="XS" <%= product.size === 'XS' ? 'selected' : '' %>>XS</option>
-                <option value="S" <%= product.size === 'S' ? 'selected' : '' %>>S</option>
-                <option value="M" <%= product.size === 'M' ? 'selected' : '' %>>M</option>
-                <option value="L" <%= product.size === 'L' ? 'selected' : '' %>>L</option>
-                <option value="XL" <%= product.size === 'XL' ? 'selected' : '' %>>XL</option>
-                <option value="2XL" <%= product.size === '2XL' ? 'selected' : '' %>>2XL</option>
-            </select><br>
-
-            <label for="gender">Product Gender:</label>
-            <select id="gender" name="gender">
-                <option value="Male" <%= product.gender === 'Male' ? 'selected' : '' %>>Male</option>
-                <option value="Female" <%= product.gender === 'Female' ? 'selected' : '' %>>Female</option>
-            </select><br>
-
-            <label for="quantity">Product Quantity:</label>
-            <input type="text" id="quantity" name="quantity" value="<%= product.quantity %>"><br>
+            <% function getProductQuantity(sizesArray, size) { %>
+                <% const foundSize = sizesArray.find(s => s.size === size); %>
+                <% return foundSize ? foundSize.quantity : 0; %>
+            <% } %>
+            
+            <fieldset>
+                <legend>Product Sizes and Quantities:</legend>
+                <% sizes.forEach(size => { %>
+                    <div>
+                        <input type="checkbox" id="size_<%= size %>" name="sizes" value="<%= size %>"
+                               <% if (product.sizes.some(s => s.size === size)) { %> checked <% } %>>
+                        <label for="size_<%= size %>"><%= size %></label>
+                        <input type="number" id="quantity_<%= size %>" name="quantities[]" min="0"
+                               value="<%= getProductQuantity(product.sizes, size) %>">
+                    </div>
+                <% }); %>
+            </fieldset>
+            
+            
+            
         </fieldset>
 
         
         <button type="submit">Update Product</button>
     </form>
-    <script src="/js/editproduct.js"></script>
+    
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('editUserForm').addEventListener('submit', function (event) {
@@ -96,7 +98,9 @@
             const type = formData.get('type').trim();
             const price = formData.get('price').trim();
             const description = formData.get('description').trim();
-            const quantity = formData.get('quantity').trim();
+            const sizes = formData.getAll('sizes[]'); // Get all selected sizes
+                const quantities = formData.getAll('quantities[]'); // Get all quantities
+
     
             
             const lettersOnlyPattern = /^[A-Za-z]+$/;
@@ -104,10 +108,7 @@
             if (!name) {
                alert("name is req")
                 valid = false;
-            } else if (!lettersOnlyPattern.test(name)) {
-                alert("name must be latters ")
-                valid = false;
-            }
+            } 
     
             if (!type) {
                alert("Product Type is required")
@@ -127,10 +128,17 @@
                 valid = false;
             }
     
-            if (!quantity || isNaN(quantity) || parseInt(quantity) <= 0) {
-                alert("Product Quantity must be a positive integer")
-                valid = false;
-            }
+            if (sizes.length !== quantities.length) {
+                    alert('Sizes and quantities must be of the same length.');
+                    valid = false;
+                }
+
+                // Validate quantities are positive integers
+                quantities.forEach(qty => {
+                    if (!Number.isInteger(parseInt(qty, 10)) || parseInt(qty, 10) <= 0) {
+                        alert('Quantities must be positive integers.');
+                        valid = false;
+                    }});
     
             if (valid) {
                 alert("add done")

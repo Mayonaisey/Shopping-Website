@@ -61,7 +61,7 @@ const fileFilter = function (req, file, cb) {
     cb(new Error('Error: Images only!'));
   }
 };
-//const upload = require('multer')({ dest: './images/db' });
+
 const upload = multer({
   storage: storage,
   fileFilter: fileFilter
@@ -81,19 +81,37 @@ app.post('/adminchange', upload.fields([
   { name: 'image2', maxCount: 1 },
   { name: 'image3', maxCount: 1 }
 ]), [
-  body('name').isAlpha().withMessage('Product Name must contain letters only').notEmpty().withMessage('Product Name is required'),
+  body('name').notEmpty().withMessage('Product Name is required'),
   body('type').isAlpha().withMessage('Product Type must contain letters only').notEmpty().withMessage('Product Type is required'),
   body('price').isFloat({ gt: 0 }).withMessage('Product Price must be a positive number').notEmpty().withMessage('Product Price is required'),
   body('description').notEmpty().withMessage('Product Description is required'),
-  
-  body('quantity').isInt({ gt: 0 }).withMessage('Product Quantity must be a positive integer').notEmpty().withMessage('Product Quantity is required')
+  body('sizes').isArray({ min: 1 }).withMessage('At least one size must be selected'),
+  body('quantities').custom((value, { req }) => {
+   
+    const selectedSizes = req.body.sizes || [];
+    const quantities = value.split(',').map(qty => {
+      const parsedQty = parseInt(qty.trim(), 10);
+      if (isNaN(parsedQty)) {
+        throw new Error('Invalid quantity format');
+      }
+      return parsedQty;
+    });    if (selectedSizes.length !== quantities.length) {
+      throw new Error('Sizes and quantities arrays must be of the same length');
+    }
+    if (quantities.some(qty => !Number.isInteger(parseInt(qty, 10)) || parseInt(qty, 10) <= 0)) {
+      throw new Error('Quantities must be positive integers');
+    }
+    return true;
+  })
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, type, price, description, size, gender, quantity } = req.body;
+  const { name, type, price, description } = req.body;
+  const sizes = req.body.sizes || [];
+  const quantities = req.body.quantities.split(',').map(qty => parseInt(qty.trim(), 10));
 
   try {
     const imagePaths = {
@@ -101,6 +119,11 @@ app.post('/adminchange', upload.fields([
       image2: req.files['image2'] ? req.files['image2'][0].filename : null,
       image3: req.files['image3'] ? req.files['image3'][0].filename : null
     };
+    const sizesArray = sizes.map((size, index) => ({
+      size,
+      quantity: parseInt(quantities[index], 10)
+    }));
+
 
     const newProduct = new Product({
       image1: imagePaths.image1,
@@ -110,9 +133,7 @@ app.post('/adminchange', upload.fields([
       type,
       price: parseFloat(price),
       description,
-      size,
-      gender,
-      quantity: parseInt(quantity, 10),
+      sizes: sizesArray
     });
 
     await newProduct.save();
@@ -122,76 +143,91 @@ app.post('/adminchange', upload.fields([
     res.status(500).send('Error saving product: ' + err.message);
   }
 });
-
+const sizes = ['xs','s', 'm', 'l','xl','2xl'];
 app.get('/edit/:id', async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
-    res.render('editproduct', { product });
+    res.render('editproduct', { product ,sizes});
   } catch (err) {
     console.error('Error fetching product:', err);
     res.status(500).send('Error fetching product: ' + err.message);
   }
 });
 
+
+//edit product
 app.post('/edit/:id', upload.fields([
   { name: 'image1', maxCount: 1 },
   { name: 'image2', maxCount: 1 },
   { name: 'image3', maxCount: 1 }
-]), async (req, res) => {
-  const { name, type, price, description, size, gender, quantity, existingImage1, existingImage2, existingImage3 } = req.body;
-
-  if (!name || !type || !price || !description || !size || !gender || !quantity) {
-    return res.status(400).send('All fields are required.');
+]), [
+  body('name').notEmpty().withMessage('Product Name is required'),
+  body('type').isAlpha().withMessage('Product Type must contain letters only').notEmpty().withMessage('Product Type is required'),
+  body('price').isFloat({ gt: 0 }).withMessage('Product Price must be a positive number').notEmpty().withMessage('Product Price is required'),
+  body('description').notEmpty().withMessage('Product Description is required'),
+  body('sizes').isArray({ min: 1 }).withMessage('At least one size must be selected'),
+  body('quantities').optional().custom((value, { req }) => {
+    if (!value) {
+      // Handle case where quantities is not provided
+      throw new Error('Quantities must be provided');
+  }
+    // Validate quantities based on selected sizes
+    const selectedSizes = req.body.sizes || [];
+    const quantities = value.split(',').map(qty => {
+      const parsedQty = parseInt(qty.trim(), 10);
+      if (isNaN(parsedQty)) {
+        throw new Error('Invalid quantity format');
+      }
+      return parsedQty;
+    });    if (selectedSizes.length !== quantities.length) {
+      throw new Error('Sizes and quantities arrays must be of the same length');
+    }
+    if (quantities.some(qty => !Number.isInteger(parseInt(qty, 10)) || parseInt(qty, 10) <= 0)) {
+      throw new Error('Quantities must be positive integers');
+    }
+    return true;
+  })
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
 
-  
-  const lettersOnlyPattern = /^[A-Za-z]+$/;
-
-  if (!lettersOnlyPattern.test(name)) {
-    return res.status(400).send('Product Name must contain letters only.');
-  }
-
-  if (!lettersOnlyPattern.test(type)) {
-    return res.status(400).send('Product Type must contain letters only.');
-  }
-
-  const productPrice = parseFloat(price);
-  const productQuantity = parseInt(quantity, 10);
-
-  if (isNaN(productPrice) || productPrice <= 0) {
-    return res.status(400).send('Price must be a positive number.');
-  }
-
-  if (isNaN(productQuantity) || productQuantity <= 0) {
-    return res.status(400).send('Quantity must be a positive integer.');
-  }
+  const { name, type, price, description } = req.body;
+  const sizes = req.body.sizes || [];
+  const quantities = req.body.quantities.split(',').map(qty => parseInt(qty.trim(), 10));
 
   try {
     const imagePaths = {
-      image1: req.files['image1'] ? req.files['image1'][0].filename : existingImage1,
-      image2: req.files['image2'] ? req.files['image2'][0].filename : existingImage2,
-      image3: req.files['image3'] ? req.files['image3'][0].filename : existingImage3
+      image1: req.files['image1'] ? req.files['image1'][0].filename : null,
+      image2: req.files['image2'] ? req.files['image2'][0].filename : null,
+      image3: req.files['image3'] ? req.files['image3'][0].filename : null
     };
+    const sizesArray = sizes.map((size, index) => ({
+      size,
+      quantity: parseInt(quantities[index], 10)
+    }));
 
-    await Product.findByIdAndUpdate(req.params.id, {
+
+    const updatingproduct = new Product({
       image1: imagePaths.image1,
       image2: imagePaths.image2,
       image3: imagePaths.image3,
       name,
       type,
-      price: productPrice,
+      price: parseFloat(price),
       description,
-      size,
-      gender,
-      quantity: productQuantity,
-    }, { new: true }).exec();
+      sizes: sizesArray
+    });
 
+    await updatingproduct .save();
     res.redirect('/adminchange');
   } catch (err) {
-    console.error('Error updating product:', err);
-    res.status(500).send('Error updating product: ' + err.message);
+    console.error('Error saving product:', err);
+    res.status(500).send('Error saving product: ' + err.message);
   }
 });
+
 
 
 app.get('/delete/:id', async (req, res) => {
