@@ -12,47 +12,12 @@
 
 <body>
 
-
-    <header>
-        <div class="logo-container">
-            <img src="images/logo.jpg" class="logo">
-            <h2 class="brandname"> Trendista </h2>
-        </div>
-        
-        <div class="search-container">
-            <div class="search-bar-container">
-                <input id="search-bar" type="text" placeholder="Search...">
-                <button class="search-btn"><i class="fas fa-search"></i></button>
-            </div>
-        </div>
-        
-        <div class="icons">
-            <div class="icon-container">
-                <a href="myprofile.html">
-                    <i class="fas fa-user"></i>
-                </a>
-                <div class="user-box">
-                    <p>Log in to enjoy special offers for members and fast checkout.</p>
-                    <button class="user-btn login-btn"><a href="signin.html">Log In</a></button>
-                    <button class="user-btn signup-btn"><a href="addaccount.html">Create Account</a></button>
-                </div>
-            </div>
-            <a href="wishlist.html" target="_self">
-                <i class="far fa-heart"></i>
-            </a>
-            <a href="../Cart/cartWeb.html" target="_self">
-                <i class="fas fa-shopping-cart"></i>
-            </a>
-        </div>
-    </header>
-    
+    <%- include('./partials/nav'); -%>
 
     <nav>
         <ul>
-            <li><a href="productsPage.html" class="home-anchor">WOMEN</a></li>
-            <li><a href="productsPage.html" class="home-anchor">MEN</a></li>
-            <li><a href="productsPage.html" class="home-anchor">GIRLS</a></li>
-            <li><a href="home.html">HOME</a></li>
+            <li><a href="products" class="home-anchor">WOMEN</a></li>
+            <li><a href="home">HOME</a></li>
             <li><a href="#sale">SALE%</a></li>
         </ul>
     </nav>
@@ -61,8 +26,8 @@
         <P id="saletext1">ADDITIONAL TO OTHER DISCOUNT</P>
 
         <P id="saletext2">ENJOY 20% OF AT CART ON SELECTED PRODUCTS </P>
-        <a href="productsPage.html">
-            <button id="shop">Shop Now</button>
+        <a href="products">
+            <button id="shop" >Shop Now</button>
     </section>
 
     <div class="main-container">
@@ -70,19 +35,16 @@
         <div class="slideshow-container">
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <div class="mySlide">
-                <div class="slide-background" style="background-image: url('hagarpics/360_F_271775672_yo8ZgraN2IHGbfqP2k0PsLjwvmatUNUJ.jpg');">
+                <div class="slide-background">
                     <div class="button-container">
-                        <a href="productsPage.html">
+                        <a href="products">
                             <button class="slide-button">WOMEN</button>
-                            <button class="slide-button">MEN</button>
-                            <button class="slide-button">GIRLS</button>
-                            <button class="slide-button">BABY</button></a>
                     </div>
                 </div>
             </div>
 
             <div class="mySlide">
-                <div class="slide-background" style="background-image: url('hagarpics/360_F_194376966_Wzg4DlkOAKbqL73u5u9tIp0wUX0xhuC4.webp');">
+                <div class="slide-background">
                     <div class="button-container">
                         <button class="slide-button">CASUAL</button>
                         <button class="slide-button">ELEGANT</button>
@@ -92,10 +54,10 @@
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
         <div class="shop-now-container">
-            <div class="shop-now-background" style="background-image: url('hagarpics/NewArrivals.jpg');">
-                <button class="shop-now-button">Shop Now</button>
+            <div class="shop-now-background">
+                <a class="shop-now-button" >Shop Now</a>
             </div>
-            <div class="bestsaller" style="background-image: url('hagarpics/best-sellers-tag-3d-speech-600nw-2300134777.webp');">
+            <div class="bestsaller">
                 <button class="harryup-button">HURRY UP</button>
             </div>
         </div>
@@ -103,30 +65,30 @@
     </div>
     <div class="categories-conatiner">
         <div class="box box1">
-            <img src="hagarpics/image12.avif" alt="T-SHIRTS">
+            <img src="" alt="T-SHIRTS">
             <h2>T-SHIRTS</h2>
-            <a href="productsPage.html">
+            <a href="products">
                 <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="box box2">
-            <img src="hagarpics/image13.webp" alt="DRESSES & SKIRTS">
+            <img src="./images/db/Floral Square-Neck Tiered Midi Dress.webp" alt="DRESSES & SKIRTS">
             <h2>DRESSES & SKIRTS</h2>
-            <a href="productsPage.html">
+            <a href="products">
                 <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="box box3">
-            <img src="hagarpics/image14.jpeg" alt="JESANS">
+            <img src="./images/db/Flare High-Rise Jean.webp" alt="JESANS">
             <h2>JEANS</h2>
-            <a href="productsPage.html">
+            <a href="products">
                 <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="box box4">
-            <img src="hagarpics/image15.webp" alt="SHIRTS & BLOUSES">
+            <img src="./images/db/Oversized Cropped Full-Zip Hoodies.jpg" alt="SHIRTS & BLOUSES">
             <h2>SHIRTS & BLOUSES</h2>
-            <a href="productsPage.html">
+            <a href="products">
                 <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
@@ -173,33 +135,8 @@
         </div>
 
     </div>
-
-    <div class="div-buttom">
-        <div class="alldiv help">
-            <h3>HELP</h3>
-            <p><a href="#contact-us">Contact Us</a></p>
-            <p><a href="#return&changes">Return and Change</a></p>
-            <p><a href="#shipping&delivery">Shipping and Delivery</a></p>
-        </div>
-
-        <div class="alldiv about-us">
-            <h3>ABOUT US</h3>
-            <p><a href="#aboutus">About us</a></p>
-            <p><a href="#CareerOpportunities">Career Opportunities</a></p>
-            <p><a href="#CorporateSupport">corporate Support</a></p>
-        </div>
-
-        <div class="alldiv policies">
-            <h3>POLICIES</h3>
-            <p><a href="#DataPrivacyAndSecurityPolicy">Data Privacy And Security Policy</a></p>
-            <p><a href="#TermsOfUSe">Terms Of Use</a></p>
-        </div>
-
-        <div class="alldiv logo">
-            <h1>TRENDISTA</h1>
-        </div>
-
-    </div>
+    <%- include('./partials/footer'); -%>
+    <%- include('./partials/ScrollUp'); -%>
 
     <button id="scrollBtn" onclick="scrollToTop()"><i class="fa-solid fa-caret-up"></i> UP</button>
     <script src="home.js"></script>

@@ -1,105 +1,103 @@
-// const User = require('../models/User');
-// const Product = require('../models/Product');
-
-// // Add a product to the cart
-// exports.addToCart = async (req, res) => {
-//   const { productId, quantity } = req.body;
-//   const userId = req.params.userId; // Assuming userId is passed in the route params
-
-//   try {
-//     let user = await User.findById(userId);
-
-//     // Check if the product is already in the cart
-//     const productIndex = user.cart.findIndex(item => item.productId.toString() === productId);
-
-//     if (productIndex !== -1) {
-//       // If product exists, update quantity
-//       user.cart[productIndex].quantity += parseInt(quantity);
-//     } else {
-//       // If product does not exist, add new item to cart
-//       user.cart.push({ productId, quantity: parseInt(quantity) });
-//     }
-
-//     await user.save();
-
-//     res.status(200).json({ message: 'Product added to cart successfully', user });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ error: 'Server error' });
-//   }
-// };
-
-// // Get user's cart
-// exports.getCart = async (req, res) => {
-//   const userId = req.params.userId; // Assuming userId is passed in the route params
-
-//   try {
-//     const user = await User.findById(userId).populate('cart.productId');
-
-//     if (!user) {
-//       return res.status(404).json({ error: 'User not found' });
-//     }
-
-//     res.status(200).json({ cart: user.cart });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ error: 'Server error' });
-//   }
-// };
-
 const User = require('../models/userModel');
 const Product = require('../models/productmodel');
 
-// Add to cart controller
-exports.addToCart = async (req, res) => {
-  try {
-    const productId = req.params.productId;
-    const user = req.user; // Assuming user object is already populated in the request
 
-    // Check if the product is already in cart
+exports.addToCart = async (req, res) => {
+  // if(!req.seesion.userId){
+  //   return res.redirect(`/login?redirectTo=${req.originalUrl}`);
+  // }
+  const {productID}=req.params;
+  const {quantity}=req.body;
+  try {
+    const UserId = req.session.userId;
+    const user = await User.findbyId(req.session.userId);
+
     const productInCart = user.cart.find(item => item.productId.toString() === productId);
 
     if (productInCart) {
       // Increase quantity if already in cart
-      productInCart.quantity += 1;
+      productInCart.quantity +=parseInt(quantity);
     } else {
       // Add new product to cart
-      user.cart.push({ productId, quantity: 1 });
+      user.cart.push({ productId, quantity :parseInt(quantity)});
     }
 
     await user.save();
-    res.redirect('/cart/view');
+   // res.redirect('/cart');
+   //3ayza yrender el [product page]
+   res.render('cart',{cart:user.cart,alert:'product added to cart successfully '});
   } catch (err) {
     console.error('Error adding to cart:', err);
-    res.status(500).send('Internal Server Error');
+   // res.status(500).send('Internal Server Error');
+   res.render('cart',{alert:'An error occurred. Please try again!'});
   }
 };
 
 // View cart controller
 exports.viewCart = async (req, res) => {
+  // if(!req.seesion.userId){
+  //   return res.redirect(`/myprofile?redirectTo=${req.originalUrl}`);
+  // }
   try {
-    const user = req.user; // Assuming user object is already populated in the request
-    await user.populate('cart.productId').execPopulate();
-    res.render('cart', { cart: user.cart });
+    // const user = await User.findbyId(req.session.userId);
+    // await user.populate('cart.productId').execPopulate();
+    // res.render('cart', { cart: user.cart });
+    const UserId= req.session.userId;
+    const user = await User.findById(UserId).populate('cart.productId');
+    if(user){
+      res.render('cart',{cart:user.cart,alert:null});
+    }
+    else{
+      res.render('cart', { alert: 'User not found' });
+    }
   } catch (err) {
     console.error('Error viewing cart:', err);
-    res.status(500).send('Internal Server Error');
+    res.render('cart', {cart:[], alert: 'An error occurred. Please try again!' });
   }
 };
 
 // Remove from cart controller
 exports.removeFromCart = async (req, res) => {
+  // if(!req.seesion.userId){
+  //   return res.redirect(`/login?redirectTo=${req.originalUrl}`);
+  // }
+  const {productId}=req.params;
   try {
-    const productId = req.params.productId;
-    const user = req.user; // Assuming user object is already populated in the request
+  //  const productId = req.params.productId;
+  
+    const user = await User.findbyId(req.session.userId);
 
     // Filter out the product to remove from cart
     user.cart = user.cart.filter(item => item.productId.toString() !== productId);
 
     await user.save();
-    res.redirect('/cart/view');
+    //cart /view a3taked
+    res.redirect('/cart');
   } catch (err) {
     console.error('Error removing from cart:', err);
-    res.status(500).send('Internal Server Error');
+    res.render('cart', { alert: 'An error occurred. Please try again!' });
   }
 };
+exports.updateCart=async(req,res)=>{
+  const {productId}=req.prams;
+  const {quantity}=req.body;
+  try{
+   const UserId=req.session.userId;
+   const user=await User.findOne({_id:UserId,'cart.productId':productId});
+    const cartItem = user.cart.find(item => item.productId.toString() === productId);
+   if(cartItem){
+    cartItem.quantity=parseInt(quantity);
+    await user.save();
+    res.redirect('cart/view');
+   }
+  }catch (err) {
+    console.error('Error updating cart:', err);
+    res.render('cart', { alert: 'An error occurred. Please try again!' });
+  }
+};
+  exports.isAuthenticated=async(req, res, next) =>{
+    if (req.session.authenticated) {
+      return next();
+    }
+    res.redirect('./accountForm.ejs'); 
+  };

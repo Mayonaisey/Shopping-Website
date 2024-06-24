@@ -1,61 +1,78 @@
-
- 
-  var products = document.getElementsByClassName("listcart");
-  updatePrice();
-    function updatePrice() {
-      var total = 0;
-      var grandTotal = 0;
-      Array.from(products).forEach(product => {
-        var quantityInput = product.querySelector(".qy");
-        var priceElement = product.querySelector(".pr").value.replace(' EGP', '');
-        var price = parseFloat(priceElement);
-        var quantity = parseInt(quantityInput.value);
-        total += price * quantity;
-      });
-      document.getElementById("Tprice").value = total.toFixed(2) + " EGP";
-      var discountRate = parseFloat(document.getElementById("dis").value.replace('%', '')) / 100;
-      grandTotal = total - (total * discountRate);
-      document.getElementById("grand").value = grandTotal.toFixed(2) + " EGP";
-    }
-    
-    for (var i = 0; i < products.length; i++) {
-      var product = products[i];
-      var plusButton = product.querySelector(".plus");
-      var minusButton = product.querySelector(".min");
-      var deleteButton = product.querySelector(".delete");
-      plusButton.addEventListener("click", createPlusFunction(product));
-      minusButton.addEventListener("click", createMinusFunction(product));
-      deleteButton.addEventListener("click", createDeleteFunction(product));
-    }
-    
-    function createPlusFunction(product) {
-      return function () {
-        var input = product.querySelector(".qy");
-        input.value = parseInt(input.value) + 1;
-        updatePrice();
-      };
-    }
-    
-    function createMinusFunction(product) {
-      return function () {
-        var input = product.querySelector(".qy");
-        var current = parseInt(input.value);
-        if (current > 1) {
-          input.value = current - 1;
-          updatePrice();
-        }
-      };
-    }
-    
-    function createDeleteFunction(product) {
-      return function () {
-        product.parentNode.removeChild(product);
-        updatePrice();
-      };
-    }
-    
+const { response } = require("express");
+const { post } = require("../../routes/checkoutRoute");    
     function passValue() {
       const grandInput = document.getElementById("grand");
       const newValue = grandInput.value;
       sessionStorage.setItem("newValue", newValue);
     }
+    document.addEventListener('DOMContentLoaded',()=>{
+      const plusButtons=document.querySelectorAll('.plus');
+      const minusButtons=document.querySelectorAll('.min');
+
+      plusButtons.forEach(button=>{
+        button.addEventListener('click',()=>handlePlusClick(button));
+      });
+      minusButtons.forEach(button=>{
+        button.addEventListener('click',()=>handlePlusClick(button));
+      });
+      if (alertElement) {
+        setTimeout(() => {
+          alertElement.style.display = 'none';
+        }, 3000); // Adjust the timeout duration as needed
+      };
+      const handlePlusClick=async(button)=>{
+        const quantityInput=button.parentElement.querySelector('.qy');
+        let quantity=parseInt(quantityInput.value);
+       // if(quantity<//max quanitiy)
+        quantity++;
+        quantityInput.value=quantity;
+        //const id=button.closest('.listcart').querySelector('.delete').getAtr
+        const itemId=button.parentElement.dataset.itemId;
+        await updateCart(itemId,quantity);
+       updatePrices();
+      };
+      const handleMinsClick=async(button)=>{
+        const quantityInput=button.parentElement.querySelector('.qy');
+        let quantity=parseInt(quantityInput.value);
+        if(quantity>1){
+        quantity--;
+        quantityInput.value=quantity;
+        const itemId=button.parentElement.dataset.itemId;
+       await updateCart(itemId,quantity);
+       updatePrices();
+      }
+      };
+      const updateCart=async(id,quantity)=>{
+        try{
+          const response =await fetch('/cart/update/${id}',{
+            method:'POST',
+            headers:{
+              'Content-Type':'application/json'
+            },
+            body:JSON.stringify({quantity})
+          });
+          if(response.ok){
+            const result=await response.json();
+            updatePrices();
+          }
+        }catch(err){
+          console.error('Error updating cart:', error);
+        }
+      };
+      const updatePrices=()=>{
+        const totalPriceElement=document.getElementById('Tprice');
+        const grandTotalElement=document.getElementById('grand');
+        const items=document.querySelectorAll('.listcart');
+        let totalPrice=0;
+        items.forEach(item=>{
+          const priceElement=item.querySelector('.pr');
+          const quantityElement=item.querySelector('.qy');
+          const price=parseFloat(priceElement.value.replace('EGP',' '));
+          const quantity =parseInt(quantityElement.value);
+          totalPrice+=price*quantity;
+        });
+        totalPriceElement.value=totalPrice.toFixed(2)+'EGP';
+        grandTotalElement.value=(totalPrice*0.9).toFixed(2)+'EGP';
+      };
+     
+    });

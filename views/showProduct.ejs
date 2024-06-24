@@ -1,99 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SEJAL - Product Details</title>
-    <link rel="stylesheet" href="/css/productsStyle.css" />
-    <link rel="stylesheet" href="./css/nav&footerStyle.css" />
-    <script src="https://kit.fontawesome.com/69992cfeb0.js"></script>
-  </head>
-  <body>
-    <header><%- include('./partials/nav'); %></header>
 
-    <div id="fullpage">
-      <div class="productDetails">
-        <div class="photosContainer">
-          <img src="../images/db/<%= item.image1 %>" class="image" />
-          <img src="../images/db/<%= item.image2 %>" class="image" />
-          <%if(item.image3!=null){%>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEJAL - Product Details</title>
+  <link rel="stylesheet" href="/css/productsStyle.css" />
+  <link rel="stylesheet" href="./css/nav&footerStyle.css" />
+  <script src="https://kit.fontawesome.com/69992cfeb0.js"></script>
+</head>
+
+<body>
+  <%- include('./partials/nav'); %>
+
+  <div id="fullpage">
+    <div class="productDetails">
+      <div class="photosContainer">
+        <img src="../images/db/<%= item.image1 %>" class="image" />
+        <img src="../images/db/<%= item.image2 %>" class="image" />
+        <% if (item.image3) { %>
           <img src="../images/db/<%= item.image3 %>" class="image" />
-          <%}%>
-
-        </div>
-        <div class="details">
-          <a><i class="fa-regular fa-heart"></i></a>
-          <p class="name"><%= item.name %></p>
-          <p class="itemSizes">
-            <% for(let i = 0; i < item.size.length; i++) { %>
-            <button
-              class="sizesButtons"
-              id="size<%= i %>"
-              onclick="colorUp('size<%= i %>')"
-            >
-              <%= item.size[i] %>
+        <% } %>
+      </div>
+      <div class="details">
+        <a><i class="fa-regular fa-heart"></i></a>
+        <p class="name">
+          <%= item.name %>
+        </p>
+        <p class="itemSizes">
+          <% for (let i = 0; i < item.sizes.length; i++) { %>
+            <button class="sizesButtons" id="size<%= i %>" onclick="colorUp('size<%= i %>')">
+              <%= item.sizes[i].size %>
             </button>
-            <% } %>
-          </p>
-          <div class="quantityDiv">
-            <p id="quantityID">1</p>
-            <button class="quantityBtn" onclick="decNumber('quantityID')">
-              <i class="fa-solid fa-caret-down"></i>
-            </button>
-            <button class="quantityBtn" onclick="incNumber('quantityID')">
-              <i class="fa-solid fa-caret-up"></i>
-            </button>
-          </div>
-          <p class="itemPrice"><%= item.price %> EGP</p>
-          <button class="addToCartBtn" onclick="addToCart('<%= item.id %>')">
-            Add To Cart
+          <% } %>
+        </p>
+        <div class="quantityDiv">
+          <p id="quantityID">1</p>
+          <button class="quantityBtn" onclick="decNumber('quantityID')">
+            <i class="fa-solid fa-caret-down"></i>
+          </button>
+          <button class="quantityBtn" onclick="incNumber('quantityID')">
+            <i class="fa-solid fa-caret-up"></i>
           </button>
         </div>
+        <p class="itemPrice">
+          <%= item.price %> EGP
+        </p>
+        <button class="addToCartBtn" onclick="addToCart('<%= item.id %>')"> 
+          Add To Cart
+        </button>
       </div>
-
-      <!-- <button id="continueShopping" onclick="continueShopping()">
-        Continue Shopping
-      </button> -->
     </div>
-    <%- include('./partials/footer'); -%>
-    <script>
-      function colorUp(sizeId) {
-        let sizesButtons = document.getElementsByClassName("sizesButtons");
-        for (let i = 0; i < sizesButtons.length; i++) {
-          if (
-            document.getElementById("size" + i).style.backgroundColor ==
-            "rgb(0, 58, 205)"
-          ) {
-            document.getElementById("size" + i).style.backgroundColor = "white";
-          }
+    <div class="productDescription">
+      <p><%= item.description %> </p>
+
+    </div>
+  </div>
+
+  <script>
+    function colorUp(sizeId) {
+      let sizesButtons = document.getElementsByClassName("sizesButtons");
+      for (let i = 0; i < sizesButtons.length; i++) {
+        if (document.getElementById("size" + i).style.backgroundColor == "#565656") {
+          document.getElementById("size" + i).style.backgroundColor = "white";
         }
-        document.getElementById(id).style.backgroundColor = "rgb(0, 58, 205)";
-        sizeIsSelected = 1;
       }
+      document.getElementById(sizeId).style.backgroundColor = "#f5f5f5";
+      sizeIsSelected = 1;
+    }
 
-      function incNumber(quantityId) {
-        var quantity = document.getElementById(id);
-        let number = parseInt(quantity.innerText);
-        quantity.innerHTML = number + 1;
-      }
+    function incNumber(quantityId) {
+      var quantity = document.getElementById(quantityId);
+      let number = parseInt(quantity.innerText);
+      quantity.innerHTML = number + 1;
+    }
 
-      function decNumber(quantityId) {
-        var quantity = document.getElementById(id);
-        let number = parseInt(quantity.innerText);
-        if (number > 0) quantity.innerHTML = number - 1;
-      }
+    function decNumber(quantityId) {
+      var quantity = document.getElementById(quantityId);
+      let number = parseInt(quantity.innerText);
+      if (number > 0) quantity.innerHTML = number - 1;
+    }
 
-      function addToCart(itemId) {
-        var quantitySelected = document.getElementById("quantityID");
-        let number = parseInt(quantitySelected.innerText);
+    function addToCart(itemId) {
+      // Fetch request to add the item to the cart
+      const quantity = document.getElementById('quantityID').innerText;
 
-        var Cart = document.getElementById(CartId);
-        let CartQuantity = parseInt(Cart.innerText);
-        Cart.innerHTML = number + CartQuantity;
-      }
+      fetch('/cartRoute/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ itemId: itemId, quantity: quantity }),
+      })
+      .then(response => {
+        if (response.status === 200) {
+          // Successfully added to cart
+          alert('Item added to cart!');
+        } else if (response.status === 401) {
+          // Not authenticated
+          window.location.href = '/login';
+        } else {
+          // Error adding to cart
+          alert('Error adding item to cart');
+        }
+      })
+      .catch(error => {
+        console.error('Error adding to cart:', error);
+        alert('Error adding item to cart');
+      });
+    }
+  </script>
+</body>
+<%- include('./partials/footer'); %>
 
-
-    </script>
-  </body>
 </html>
