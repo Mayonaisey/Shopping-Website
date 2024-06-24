@@ -57,4 +57,5 @@ router.get('/view', cartController.viewCart);
 // Route to remove item from cart
 router.post('/remove/:productId', cartController.removeFromCart);
 
+router.post('/update/:productId', cartController.updateCart);
 module.exports = router;

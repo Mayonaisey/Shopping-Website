@@ -13,7 +13,7 @@
   <div class="body">
     <h1 class="head">My Cart </h1>
     <div class="cart">
-      <%if(cart.lenght>0){%>
+      <!--<%if((cart.length)>0){%>
         <%cart.forEach(item=>{%>
       <div class="listcart">
         <div class="image">
@@ -27,14 +27,14 @@
           <div class="size">size: M</div>
         </div>
 
-        <div class="quan">
+        <div class="quan" data-item-id="<%=item.id%>">
           <button class="min">-</button>
           <input class="qy" type="text" value="<%=item.quantity%>" readonly>
           <button class="plus">+</button>
         </div>
 
         <div class="s">
-          <input class="pr" type="text" value="<%= item.productId.price * item.quantity).toFixed(2) %> EGP" readonly><br><br>
+          <input class="pr" type="text" value="<%= item.productId.price * item.quantity.toFixed(2) %> EGP" readonly><br><br>
           <span>
             <form action="/cart/remove/<%item.productId._id%>" method="post">
             <button class="delete">d</button>
@@ -45,7 +45,38 @@
       </div>
       <%});%>
 
-      <%}>
+      <%}%>-->
+      <% if (cart.length > 0) { %>
+        <% cart.forEach(item => { %>
+          <div class="listcart">
+            <div class="image">
+              <img src="<%= item.productId.imageUrl %>" width="250" height="200">
+            </div>
+            <div class="cart-info">
+              <div class="name"><%= item.productId.name %></div><br>
+              <div class="code">Product code: <%= item.productId._id %></div><br><br>
+              <div class="size">size: M</div>
+            </div>
+            <div class="quan" data-item-id="<%= item.id %>">
+              <button class="min">-</button>
+              <input class="qy" type="text" value="<%= item.quantity %>" readonly>
+              <button class="plus">+</button>
+            </div>
+            <div class="s">
+              <input class="pr" type="text" value="<%= (item.productId.price * item.quantity).toFixed(2) %> EGP" readonly><br><br>
+              <span>
+                <form action="/cart/remove/<%= item.productId._id %>" method="post">
+                  <button class="delete">d</button>
+                </form>
+                <button id="wishlist">w</button>
+              </span>
+            </div>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <p>Your cart is empty.</p>
+      <% } %>
+      
       <div class="total-price">
         <h2>Order Summary</h2>
         <table>
@@ -77,7 +108,7 @@
             </td>
           </tr>
         </table>
-        <a href="checkout.ejs"><button class="to-checkout" id="bt" onclick="passValue()">Proceed to checkout</button>
+        <a href="./checkout.ejs"><button class="to-checkout" id="bt" onclick="passValue()">Proceed to checkout</button>
       </div>
     </div>
   </div>
