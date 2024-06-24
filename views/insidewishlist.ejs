@@ -2,65 +2,67 @@
 <html>
   <head>
     <link rel="stylesheet" href="/css/insidewish.css">
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
     <%- include('./partials/nav'); %>
-<div class="main">
-
-    <div class="titlediv">
-      <h1 class="title"> MY FAVOURITES</h1>
-      <hr style="width:385%;">
+    <div class="main">
+      <div class="titlediv">
+        <h1 class="title">MY FAVOURITES</h1>
+        <hr style="width:385%;">
+      </div>
+      <% if (wishlistItems.length > 0) { %>
+        <% wishlistItems.forEach(item => { %>
+          <div class="itemdiv" data-id="<%= item._id %>">
+            <div class="picdiv">
+              <img class="pic" src="<%= item.image1 %>">
+            </div>
+            <div class="detailsdiv">
+              <a href="/product/<%= item._id %>">
+                <h5>
+                  <span class="description" title="<%= item.name %>">
+                    <%= item.name %> <br> price: <%= item.price %> LE
+                  </span>
+                </h5>
+              </a>
+            </div>
+            <div class="basketdiv">
+              <button class="basketbutton">MOVE TO BASKET</button>
+            </div>
+            <div class="removediv">
+              <button class="removebutton" onclick="removeItem('<%= item._id %>')">Remove</button>
+            </div>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <p>Your wishlist is empty.</p>
+      <% } %>
     </div>
-    <% if (user.wishlist.length> 0) { %>
-      <% user.wishlist.forEach(item=> { %>
-    <div class="itemdiv">
-      <div class="picdiv">
-        <img class="pic" src="https://eg.hm.com/assets/styles/HNM/16439533/70aef1329ff6b7b50fd258f91bee562530e4ef1a/1/image-thumb__4761261__product_listing/70aef1329ff6b7b50fd258f91bee562530e4ef1a.jpg">
-      </div>
+    <%- include('./partials/footer'); %>
 
-      <div class="detailsdiv">
-<a href="item.html"><h5><span class="description" title="Denim pull-on shorts">Denim pull-on shorts  <br> price: 1050 LE </span></h5></a>
-      </div>
-      <div class="basketdiv">
-        <button class="basketbutton">MOVE TO BASKET</button>
-      </div>
-      <div class="removediv">
-        <button class="removebutton"> Remove</button>
-      </div>
+    <script>
+      async function removeItem(itemId) {
+        try {
+          const response = await fetch(`/wishlist/${itemId}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
 
-    </div>
-  </div>
-<%});%>
-<%}%>
-
-<!-- dah lll second item lghayt ma nedkhal data base-->
-  <div class="main">
-
-   
-    <div class="itemdiv">
-      <div class="picdiv">
-        <img class="pic" src="https://eg.hm.com/assets/styles/HNM/16705226/4c5989be5bc6ddcbc237fb2fd8862c5b21ca26c3/1/image-thumb__4865913__product_listing/4c5989be5bc6ddcbc237fb2fd8862c5b21ca26c3.jpg">
-      </div>
-
-      <div class="detailsdiv">
-<a href="item.html"><h5><span class="description" title="Linen-blend pull-on trousers">Linen-blend pull-on trousers <br> price: 950 LE</span></h5></a>
-      </div>
-      <div class="basketdiv">
-        <button class="basketbutton">MOVE TO BASKET</button>
-      </div>
-      <div class="removediv">
-        <button class="removebutton"> Remove</button>
-      </div>
-
-    </div>
-  </div>
-  <%- include('./partials/footer'); -%>
-
+          if (response.ok) {
+            // Remove the item from the DOM
+            const itemDiv = document.querySelector(`.itemdiv[data-id="${itemId}"]`);
+            itemDiv.remove();
+          } else {
+            console.error('Failed to remove item from wishlist');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+    </script>
   </body>
 </html>
