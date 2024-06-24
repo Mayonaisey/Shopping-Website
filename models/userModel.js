@@ -41,18 +41,18 @@ const userSchema = new mongoose.Schema({
         minlength: 6
     },
     cart:[{
-        productId:{ type:mongoose.Schema.Types.ObjectId,ref:'product'},
+        productId:{ type:mongoose.Schema.Types.ObjectId,ref:'Productmodel'},
         quantity:Number
     }],
     orders:[{
         products:[{
-            productId:{type:mongoose.Schema.Types.ObjectId,ref:'product'},
+            productId:{type:mongoose.Schema.Types.ObjectId,ref:'Productmodel'},
             quantity:Number
         }],
         orderDate:{type:Date,default:Date.now}
     }],
     wishlist:[{
-        productId:{ type:mongoose.Schema.Types.ObjectId,ref:'product'}
+        productId:{ type:mongoose.Schema.Types.ObjectId,ref:'Productmodel'}
     }]
 });
  

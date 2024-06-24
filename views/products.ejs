@@ -1,28 +1,26 @@
 <!DOCTYPE html>
-<html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>SEJAL.com</title>
-      <link rel="stylesheet" href="./css/productsStyle.css" />
-      <link rel="stylesheet" href="./css/nav&footerStyle.css" />
-      <script src="https://kit.fontawesome.com/69992cfeb0.js"></script>
-    </head>
-    <body>
-        <%- include('./partials/nav'); %>
-   <div id="fullpage">
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEJAL.com</title>
+  <link rel="stylesheet" href="./css/productsStyle.css" />
+  <link rel="stylesheet" href="./css/nav&footerStyle.css" />
+  <script src="https://kit.fontawesome.com/69992cfeb0.js"></script>
+</head>
+<body>
+  <%- include('./partials/nav'); %>
+
+  <div id="fullpage">
     <div id="page">
-     <div class="sidebar">
-          <h4 id="filter"><i class="fa-solid fa-filter"></i> Filters</h4>
-          <!--second is the dropdown menu for size-->
-       <div class="size-content">
+      <div class="sidebar">
+        <h4 id="filter"><i class="fa-solid fa-filter"></i> Filters</h4>
+        <div class="size-content">
           <button class="size-btn" onclick="displaySize()">Size
-            <i class="fa fa-caret-down" ></i>
+            <i class="fa fa-caret-down"></i>
           </button>
           <div id="dropdown-size">
-            <!--buttons for range of sizes-->
             <input type="radio" id="small" name="size" value="small">
             <label for="small"> S</label><br>
             <input type="radio" id="medium" name="size" value="medium">
@@ -32,9 +30,8 @@
             <input type="radio" id="xlarge" name="size" value="xlarge">
             <label for="xlarge">XL</label><br>
           </div>
-        </div><!--close tag for size-content-->
-           <!--buttons for product types-->
-           <div class="product-content">
+        </div>
+        <div class="product-content">
           <button class="product-btn" onclick="displayProduct()">Product Type
             <i class="fa fa-caret-down"></i>
           </button>
@@ -50,48 +47,118 @@
             <input type="radio" id="prod5" name="prod" value="Dress">
             <label for="prod5">Dress</label><br>
           </div>
-         </div><!--close tag for product-content-->
-     
-         <button type="button" id="searchBtn" onclick="searchProduct()">Search</button>
-         <button type="button" id="exitBtn" onclick="clearCart()">Exit Page</button>
-     </div> <!--close tag for sidebar-->
-          <!--here goes each product-->
-          <se5ction class="product-list">
-             <div class="producttxt"><h1>Products</h1></div>
-             <div id="product-container">
-                <% products.forEach((product)=>{ %>
-                    <a class="card" href="/products/:<%= product.id %>">
-                        <img src=<%= product.image1 %> class="img">
-                        <span class="tooltiptext"><%= product.name %></span>
-                        <p class="text"><%= product.name %></p>
-                        <p class="price">Price: <%= product.price %> EGP</p>
-                        <!-- <p class="sizes">Sizes: <%= product.size.join(", ") %></p> -->
-                    </a>
-                <% })%>
-             </div>
-          </section>
-        </div><!--close tag for page-->
-            <%- include('./partials/footer'); -%>
-   </div> <!--close tag for fullpage-->
-   <script src="./js/cart.js"></script>  
-   <script src="./js/products.js"></script>
-  </body>
-  </html>
+        </div>
+        <button type="button" id="searchBtn" onclick="searchProduct()">Search</button>
+        <button type="button" id="exitBtn" onclick="clearCart()">Exit Page</button>
+      </div>
+      <section class="product-list">
+        <div class="producttxt"><h1>Products</h1></div>
+        <div id="product-container">
+          <% products.forEach((product) => { %>
+            <a class="card" href="/products/<%= product.id %>">
+              <img src="<%= product.image1 %>" class="img">
+              <span class="tooltiptext"><%= product.name %></span>
+              <p class="text"><%= product.name %></p>
+              <p class="price">Price: <%= product.price %> EGP</p>
+            </a>
+          <% }) %>
+        </div>
+      </section>
+    </div>
+    <%- include('./partials/footer'); %>
+  </div>
 
+  <script src="./js/cart.js"></script>
+  <script src="./js/products.js"></script>
+  <script>
+    function displaySize() {
+      var x = document.getElementById("dropdown-size");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
+      }
+    }
 
-<!-- <div class="product-container">
-<table class="products-table ">
-  <tr>
-      <td >Photo1</td>
-      <td data-label="Age">Photo2</td>
-  </tr>
-  <tr>
-      <td data-label="Name">name1</td>
-      <td data-label="Age">name2</td>
-  </tr>
-  <tr>
-      <td data-label="Name">description1</td>
-      <td data-label="Age">description2</td>
-  </tr>
-</table>
-</div> -->
+    function displayProduct() {
+      var x = document.getElementById("dropdown-producttype");
+      if (x.style.display === "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
+      }
+    }
+
+    async function searchProduct() {
+      let sizeSelected = "";
+      let prodSelected = "";
+
+      let siz = document.getElementsByName("size");
+      let prod = document.getElementsByName("prod");
+
+      for (let i = 0; i < siz.length; i++) {
+        if (siz[i].checked) {
+          sizeSelected = siz[i].value;
+        }
+      }
+
+      for (let i = 0; i < prod.length; i++) {
+        if (prod[i].checked) {
+          prodSelected = prod[i].value;
+        }
+      }
+
+      fetch('/products/filter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          size: sizeSelected,
+          type: prodSelected,
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        displayFilteredProducts(data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    }
+
+    function displayFilteredProducts(products) {
+      const container = document.getElementById('product-container');
+      container.innerHTML = ''; // Clear previous products
+
+      products.forEach(product => {
+        const card = document.createElement('a');
+        card.className = 'card';
+        card.href = `/products/${product.id}`;
+        
+        const img = document.createElement('img');
+        img.src = product.image1;
+        img.className = 'img';
+        card.appendChild(img);
+        
+        const tooltip = document.createElement('span');
+        tooltip.className = 'tooltiptext';
+        tooltip.textContent = product.name;
+        card.appendChild(tooltip);
+        
+        const name = document.createElement('p');
+        name.className = 'text';
+        name.textContent = product.name;
+        card.appendChild(name);
+        
+        const price = document.createElement('p');
+        price.className = 'price';
+        price.textContent = `Price: ${product.price} EGP`;
+        card.appendChild(price);
+        
+        container.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>

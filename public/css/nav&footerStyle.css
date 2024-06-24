@@ -1,148 +1,253 @@
 * {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  }
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    background-color:#FCF4EC;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  
-  h1 {
-    color: #0f0d0d;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 60 px;
-    margin-top: 10px;
-  
-  }
-  #website-name{
-    color: #9e0707;
-    text-decoration: none;
-  
-  }
-  .logo {
-    padding: 1em;
-    size: 20px;
-    border-radius: 90%;
-  }
-  
-  .search-container {
-    position: relative;
-  }
-  
-  #search-bar {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 0 20px 20px 0;
-    width: 500px;
-  
-  }
-  #search-bar:focus {
-    outline: none;
-    border: 1px solid #b1c060;
-    color: #82614a;
-  }
-  .icon-Cart span{
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 20px;
   display: flex;
-  width: 25px;
-  height: 25px;
-  background-color: red;
-  justify-content:center ;
   align-items: center;
-  color: white;
-  border-radius: 50%;
-  position: absolute;
-  top: 0%;
-  right: -15px;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color:#FCE4EC;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+h1 {
+  color: #0f0d0d;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 60 px;
+  margin-top: 10px;
+
+}
+#website-name{
+  color: #9e0707;
+  text-decoration: none;
+
+}
+.logo {
+  padding: 1em;
+  size: 20px;
+  border-radius: 90%;
+}
+
+.search-container {
+  position: relative;
+}
+
+#search-bar {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 0 20px 20px 0;
+  width: 500px;
+
+}
+#search-bar:focus {
+  outline: none;
+  border: 1px solid #b1c060;
+  color: #82614a;
+}
+.icon-Cart span{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
+display: flex;
+width: 25px;
+height: 25px;
+background-color: red;
+justify-content:center ;
+align-items: center;
+color: white;
+border-radius: 50%;
+position: absolute;
+top: 0%;
+right: -15px;
+}
+.icon-Cart{
+  position: relative;
   }
-  .icon-Cart{
-    position: relative;
-    }
-  
-  .fa-solid.fa-magnifying-glass {
-    padding-top: 0.5em;
-      border: none;
-      display:flex;
-      color: #6b7055;
-    }
-  .icons i {
-    font-size: 2em;
-    margin-left: 20px;
-    cursor: pointer;
-  }
-  .icons a{
-    color: #000;
-  }
-  .icons i:hover{
-    color:#1188b0
-  }
-  
-  .icon-container:hover .user-box {
-    visibility: visible;
-    opacity: 1;
-  }
-  
-  
-  .icon-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .user-box {
-    visibility: hidden;
-    width: 300px;
-    background-color: black;
-    color: white;
-    text-align: center;
-    border-radius: 6px;
-    padding: 10px;
-    position: absolute;
-    transform: translateX(-50%);
-  }
-  
-  .user-box p {
-    margin-bottom: 10px;
-  }
-  
-  .user-btn {
-    color: white;
-    background-color: #555;
+
+.fa-solid.fa-magnifying-glass {
+  padding-top: 0.5em;
     border: none;
-    padding: 8px 16px;
-    margin: 5px 0;
-    cursor: pointer;
-    width: 90%;
-  
-  
+    display:flex;
+    color: #6b7055;
   }
-  
-  .user-btn a {
-    text-decoration: none;
-    color: white;
-  }
-  
-  .user-btn a:hover {
-    color: rgb(69, 50, 211);
-  }
-  
-  .bt{
-  
-    font-size: 1.5em;
-    border:none;
-    border-radius: 2em;
-    size: 2em;
+.icons i {
+  font-size: 2em;
+  margin-left: 20px;
+  cursor: pointer;
+}
+.icons a{
+  color: #000;
+}
+.icons i:hover{
+  color:#1188b0
+}
+
+.icon-container:hover .user-box {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.user-box {
+  visibility: hidden;
+  width: 300px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.user-box p {
+  margin-bottom: 10px;
+}
+
+.user-btn {
+  color: white;
+  background-color: #555;
+  border: none;
+  padding: 8px 16px;
+  margin: 5px 0;
+  cursor: pointer;
+  width: 90%;
+
+
+}
+
+.user-btn a {
+  text-decoration: none;
+  color: white;
+}
+
+.user-btn a:hover {
+  color: rgb(69, 50, 211);
+}
+
+.bt{
+
+  font-size: 1.5em;
+  border:none;
+  border-radius: 2em;
+  size: 2em;
 }
 
 .bt:hover {background-position-y: center; background-color: #b3cd92;}
 #page {
-  padding-top: 2em;
+padding-top: 2em;
+display: flex;
+flex-direction: row;
+text-align: center;
+}
+
+
+.div-buttom {
   display: flex;
-  flex-direction: row;
+  justify-content: space-around;
+  background-color: #d7d7d7;
+  color: rgb(212, 139, 139);
+  padding: 20px 0;
+}
+
+.div-buttom .alldiv, .div-buttom .logo {
   text-align: center;
+}
+
+.div-buttom .alldiv h3 {
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: #131313;
+}
+
+.div-buttom .alldiv p {
+  margin: 5px 0;
+  font-size: 0.8em;
+}
+
+.div-buttom .alldiv p a {
+  color: #595959;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.div-buttom .alldiv p a:hover {
+  color: #fff;
+}
+
+.div-buttom .logo h1 {
+  font-size: 1.2em;
+}
+
+
+#scrollBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  display: none;
+  transition: background-color 0.3s;
+}
+
+#scrollBtn:hover {
+  background-color: #0056b3;
+}
+
+
+@media (max-width: 768px) {
+  header, .search-container, .icons, .categories-conatiner, .about, .div-buttom {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .shop-now-container {
+      flex-direction: column;
+  }
+
+  .shop-now-background, .bestsaller {
+      width: 100%;
+      height: 150px;
+      margin-bottom: 20px;
+  }
+
+  .categories-conatiner .box {
+      width: 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  header .brandname {
+      font-size: 16px;
+  }
+
+  .categories-conatiner .box {
+      width: 100%;
+  }
+
+  .about .boxs {
+      width: 90%;
+      margin-bottom: 20px;
+  }
+
+  .div-buttom .alldiv, .div-buttom .logo {
+      width: 90%;
+      text-align: center;
+      margin-bottom: 20px;
+  }
+
+  .div-buttom .logo h1 {
+      font-size: 1.2em;
+  }
 }

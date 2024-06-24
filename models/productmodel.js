@@ -50,9 +50,9 @@ const productSchema = new mongoose.Schema({
   },
 });
 
+productSchema.statics.findById = function(id) {
+  return this.findOne({ _id: id });
+};
 const Product = mongoose.model("Productmodel", productSchema);
 
-exports.getProductById = (id) => {
-  return Product.find(product => product.id == id);
-};
 module.exports = Product;
