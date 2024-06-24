@@ -38,13 +38,8 @@ exports.addToCart = async (req, res) => {
 
 // View cart controller
 exports.viewCart = async (req, res) => {
-  // if(!req.seesion.userId){
-  //   return res.redirect(`/myprofile?redirectTo=${req.originalUrl}`);
-  // }
+ 
   try {
-    // const user = await User.findbyId(req.session.userId);
-    // await user.populate('cart.productId').execPopulate();
-    // res.render('cart', { cart: user.cart });
     const UserId= req.session.userId;
     const user = await User.findById(UserId).populate('cart.productId');
     if(user){
@@ -61,16 +56,12 @@ exports.viewCart = async (req, res) => {
 
 // Remove from cart controller
 exports.removeFromCart = async (req, res) => {
-  // if(!req.seesion.userId){
-  //   return res.redirect(`/login?redirectTo=${req.originalUrl}`);
-  // }
+ 
   const {productId}=req.params;
   try {
-  //  const productId = req.params.productId;
-  
+ 
     const user = await User.findbyId(req.session.userId);
-
-    // Filter out the product to remove from cart
+    
     user.cart = user.cart.filter(item => item.productId.toString() !== productId);
 
     await user.save();

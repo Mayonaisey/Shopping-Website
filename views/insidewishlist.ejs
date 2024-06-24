@@ -17,6 +17,8 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
       <h1 class="title"> MY FAVOURITES</h1>
       <hr style="width:385%;">
     </div>
+    <% if (user.wishlist.length> 0) { %>
+      <% user.wishlist.forEach(item=> { %>
     <div class="itemdiv">
       <div class="picdiv">
         <img class="pic" src="https://eg.hm.com/assets/styles/HNM/16439533/70aef1329ff6b7b50fd258f91bee562530e4ef1a/1/image-thumb__4761261__product_listing/70aef1329ff6b7b50fd258f91bee562530e4ef1a.jpg">
@@ -34,7 +36,8 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     </div>
   </div>
-
+<%});%>
+<%}%>
 
 <!-- dah lll second item lghayt ma nedkhal data base-->
   <div class="main">

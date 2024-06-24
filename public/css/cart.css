@@ -265,3 +265,19 @@ body {
     color: #f8f8f8;
     background-color: rgb(34, 76, 34);
 }
+
+@media (max-width: 1024px) {
+    .listcart {
+        width: 100%; /* Adjusting width to full width on smaller screens */
+        margin-left: 0; /* Remove left margin on smaller screens */
+        margin-bottom: 20px; /* Increase bottom margin for spacing */
+    }
+
+    .total-price {
+        width: 100%; /* Full width on smaller screens */
+        margin-top: 20px; /* Adjusted top margin for spacing */
+        position: relative; /* Remove fixed positioning */
+        top: auto; /* Remove fixed positioning */
+        right: auto; /* Remove fixed positioning */
+    }
+}

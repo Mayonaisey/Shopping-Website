@@ -1,13 +1,7 @@
-.logo {
-    margin: 10px;
-    margin-left: 80px;
-    margin-right: 20px;
-    margin-bottom: 10px;
-    padding: 0%;
-    width: 90px;
-    border-radius: 50%;
-
+body {
+    font-size: 16px;
 }
+
 header {
     display: flex;
     align-items: center;
@@ -16,15 +10,27 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
+    flex-wrap: wrap;
 }
+
+.logo {
+    margin: 10px;
+    margin-left: 80px;
+    margin-right: 20px;
+    width: 90px;
+    border-radius: 50%;
+}
+
 .brandname {
     margin-top: 40px;
 }
+
 .icons i {
     font-size: 2em;
     margin-left: 20px;
     cursor: pointer;
 }
+
 .icons a {
     color: #000;
 }
@@ -33,30 +39,29 @@ header {
     color: rgb(142, 170, 0);
 }
 
+.icon-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 100px;
+}
+
 .icon-container:hover .user-box {
     visibility: visible;
     opacity: 1;
 }
 
-
-.icon-container {
-    position: relative;
-    display: inline-block;
-    margin-left:100px;
-}
-#carticon{
+#carticon {
     margin-top: 40px;
     margin-left: 950px;
     font-size: 25px;
-  
-  }
-  #homeicon{
-  
+}
+
+#homeicon {
     margin-top: 40px;
     margin-left: 20px;
     font-size: 25px;
-  
-  }
+}
+
 .user-box {
     visibility: hidden;
     width: 300px;
@@ -81,8 +86,6 @@ header {
     margin: 5px 0;
     cursor: pointer;
     width: 90%;
-
-
 }
 
 .user-btn a {
@@ -93,38 +96,35 @@ header {
 .user-btn a:hover {
     color: rgb(142, 170, 0);
 }
-  
-body{
-    /* background-color: #FCF4EC; */
-    font-size: 16px;
-}
-.final{
+
+.final {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     height: 100%;
-    width:calc(100%+3px) ;
-    /* background-color: beige; */
+    width: 65%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
+
 .data {
-    margin:20px;
-    background-color:aliceblue;
-    width:100%;
+    margin: 20px;
+    background-color: aliceblue;
+    width: 65%;
     border: solid 2px black;
-    border-radius:10px;
-    height: auto;
+    border-radius: 10px;
     text-align: center;
     align-items: center;
     justify-content: center;
-    width:max-content;
 }
 
-label{
-    display:block;
-    margin-bottom: 5px
+label {
+    display: block;
+    margin-bottom: 5px;
 }
+
 input {
     border: 1px solid #ccc;
     padding: 10px;
@@ -132,61 +132,160 @@ input {
     width: 100%;
     box-sizing: border-box;
     border-radius: 2px;
-    /* margin:5px; */
-    /* margin-left:10px;
-    width: 300px; */
 }
-#bt{
+
+#bt {
     text-align: center;
 }
-#bt:hover{
+
+#bt:hover {
     background-color: rgb(18, 57, 32);
-    color:aliceblue;
+    color: aliceblue;
     cursor: pointer;
 }
-#bt a{
+
+#bt a {
     text-decoration: none;
 }
-.TotalPrice{
-    display:flex;
-    padding-left:30px;
+
+.TotalPrice {
+    display: flex;
+    padding-left: 30px;
 }
-label[for="lb"]{
+
+label[for="lb"] {
     margin-top: auto;
-    padding-left:5px;
+    padding-left: 5px;
     font-size: 18px;
     font-weight: bold;
 }
-.total{
+
+.total {
     background-color: aliceblue;
-    margin-right: 0px;
-    margin-top: auto;
-    text-align: right; 
+    text-align: right;
     border: none;
-    outline:none;
-    font-weight:bold;
-    width:auto;
+    outline: none;
+    font-weight: bold;
+    width: auto;
     font-size: 16px;
-    font-weight: bold; 
 }
-#placeOrder{
-    width:425px;
-    height:40px;
-    padding-bottom:0px;
+
+#placeOrder {
+    width: 425px;
+    height: 40px;
+    padding-bottom: 0px;
     transition: 0.25s;
 }
-#placeOrder:hover{
+
+#placeOrder:hover {
     background-color: rgb(34, 76, 34);
-    color:aliceblue;
+    color: aliceblue;
     cursor: pointer;
 }
-.error{
+
+.error {
     color: red;
     font-size: 90%;
 }
-.row{
-    display:block;
 
+.row {
+    display: block;
+}
+
+/* Media Queries */
+
+/* iPhone (portrait and landscape) */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo {
+        margin-left: 0;
+        width: 50px;
+    }
+
+    .brandname {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .icons i {
+        font-size: 1.5em;
+    }
+
+    .icon-container {
+        margin-left: 0;
+    }
+
+    #carticon,
+    #homeicon {
+        margin-top: 20px;
+        margin-left: 0;
+        font-size: 20px;
+    }
+
+    .final, .data, #placeOrder {
+        width: 90%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .TotalPrice {
+        padding-left: 10px;
+    }
+
+    .total {
+        font-size: 14px;
+    }
+}
+
+/* iPad (portrait and landscape) */
+@media (min-width: 601px) and (max-width: 1024px) {
+    header {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo {
+        margin-left: 40px;
+        width: 70px;
+    }
+
+    .brandname {
+        margin-top: 30px;
+    }
+
+    .icons i {
+        font-size: 1.75em;
+    }
+
+    .icon-container {
+        margin-left: 50px;
+    }
+
+    #carticon,
+    #homeicon {
+        margin-top: 30px;
+        margin-left: 0;
+        font-size: 22px;
+    }
+
+    .final, .data, #placeOrder {
+        width: 80%;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .TotalPrice {
+        padding-left: 20px;
+    }
+
+    .total {
+        font-size: 15px;
+    }
 }
 
 /* .form-inline label, .form-inline input {
