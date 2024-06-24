@@ -4,65 +4,58 @@ body {
 
 }
 
-
 a {
   text-decoration: none;
 }
 
 a:hover {
-  color: rgb(213, 242, 67);
+  color: blueviolet;
 }
-
 .main {
   margin-left: 170px;
   margin-right: 170px;
   background: whitesmoke;
   background-color: white;
-
   width: 1090px;
   height: 665px;
   display: flex;
 }
 
-.rightside {
+.leftPart {
   margin-top: 50px;
   width: 350px;
-  height: 500px;
+  height: 600px;
   margin-right: 70px;
   display: flex;
   flex-direction: column;
 
-
 }
 
-.leftside {
+.rightPart {
   margin-top: 50px;
   background-color: white;
   margin-left: 0px;
+  padding-left: 10px;
   display: flex;
-  height: 500px;
-  width: 1300px;
+ width: 1300px;
   display: 2fr;
   border: 1px solid #948b7e;
   box-shadow: 5px 5px 5px rgb(163, 162, 162);
 
-
 }
 
-.upperright {
+.upperLeft {
   background-color: #d1d0ce;
   border: 1px solid #948b7e;
-
-  height: 30%;
+  height: 25%;
   justify-content: left;
 
 }
 
-.p1 {
+h3 {
   font-weight: bold;
   margin: 40px;
   margin-left: 15px;
-  font-size: medium;
   text-align: left;
 }
 
@@ -71,7 +64,7 @@ a:hover {
   font-size: 20px;
 }
 
-.lowerright {
+.lowerLeft {
 
   flex: 2;
   background-color: whitesmoke;
@@ -81,21 +74,21 @@ a:hover {
   border: 2px solid #948b7e;
 
 }
-
-.two {
-  background-color: #f5f5f5;
-  flex: 1;
-  padding: 5px;
-padding-bottom: 0px;
-  padding-top: 20px;
-  margin-top: 5px;
-  margin-bottom: 0px;
-
+.one{
+  padding-top: 10px;
+  padding-left: 5px;
 
 }
 
+.two {
+  flex: 1;
+  padding-top: 20px;
+  padding-left: 5px;
+  padding-bottom: 10px;
+  margin-bottom: 0px;
+}
+
 .three {
-  background-color: #f5f5f5;
   flex: 1;
   padding: 5px;
   padding-top: 0px;
@@ -103,15 +96,13 @@ padding-bottom: 0px;
 }
 
 .four {
-  background-color: #f5f5f5;
   flex: 1;
   padding: 5px;
-  padding-top: 20px;
+  padding-top: 5px;
 
 }
 
 .five {
-  background-color: #f5f5f5;
   flex: 1;
   padding: 10px;
   padding-top: 30px;
@@ -131,78 +122,8 @@ padding-bottom: 0px;
   color: rgb(142, 170, 0);
 }
 
-.logo {
-  margin: 10px;
-  margin-left: 80px;
-  margin-right: 20px;
-  margin-bottom: 0px;
-  padding: 0%;
-  width: 90px;
-  border-radius: 50%;
 
-}
-
-header {
-  display: flex;
-  align-items: left;
-  padding: 10px;
-  background-color: #9b9690;
-  height: 100px;
-
-}
-
-.brandname {
-  margin-top: 40px;
-}
-
-
-/* dah el style bta3 el footer */
-
-.div-buttom {
-display: flex;
-margin-top: 40px;
-background-color: rgb(235, 234, 234);
-}
-
-.div-buttom .alldiv {
-display: flex;
-flex-direction: column;
-justify-content: center;
-padding: 20px;
-width: 100%;
-height: 170px;
-margin-bottom: 10px;
-}
-
-.div-buttom .alldiv p {
-margin-top: 0;
-margin-bottom: 5px;
-}
-
-.div-buttom .alldiv a {
-text-decoration: none;
-color: gray;
-
-
-}
-#carticon{
-margin-top: 40px;
-margin-left: 980px;
-font-size: 25px;
-
-}
-#homeicon{
-
-margin-top: 40px;
-margin-left: 20px;
-font-size: 25px;
-
-}
-.wishdiv , .orderdiv,.contactdiv{
-  display: none;
-}
-
-.wishdiv{
+.wishdiv ,.orderdiv{
   display: flex;
       flex-direction: column; 
       justify-content: center;
@@ -213,31 +134,22 @@ font-size: 25px;
       height: 100%;
 }
 
-.wishsora{
+.wishsora,.ordersora{
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   vertical-align: middle;
   width: 100%;
-  height: 250px;
+  height: 300px;
 }
 .wishkalam , .orderkalam{
   flex: 1;
   color: rgb(32, 31, 31);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin-top: 10px;
   font-weight:bold;
   text-align: center;
-}
-
-
-
-.ordersora{
-  flex: 1 ;
-}
-
-.orderkalam{
-margin-left:230px ;
 }
 
 .smalltext{
@@ -245,11 +157,16 @@ margin-left:230px ;
 
 }
 
+
 button{
   padding: 10px;
   color: white;
-  background-color:   #717463;
+  background-color:   #948b7e;
   border: none;
+  transition: opacity 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+
+
 }
 button:hover{
   opacity: 0.8;
@@ -258,9 +175,7 @@ button:hover{
 .buttontext{
   color: white;
 }
-.buttontext:active{
-  color: grey;
-}
+
 .buttontext:hover{
   color: white;
 }
@@ -268,7 +183,6 @@ h1{
   color: #717463;
 
 }
-
 
 label {
   display: block;
@@ -286,18 +200,18 @@ input {
 
 }
 
-
-#send {
+#send  {
   margin-left: 460px;
   padding: 10px ;
-  background-color: #948b7e;
-  color: white;
   border: none;
   border-radius: 5px;
+  background-color:   #948b7e;
+color: white;
 
 }
 
-#send:hover {
+
+#send:hover ,.logoutButton:hover {
   opacity: 0.8;
   box-shadow: 5px 5px 5px rgb(142, 141, 141);
 }
@@ -308,14 +222,6 @@ input {
   text-shadow: 5px 5px 5px rgb(126, 126, 126);
 }
 
-/* h1 {
-  margin: 100px;
-  margin-left: 130px;
-  margin-bottom: 30px;
-  color: #1f4959;
-  text-align: center;
-  text-decoration: wavy;
-} */
 
 .links {
   color: black;
@@ -326,67 +232,180 @@ input {
 
 }
 
-.kalamtaht {
-  margin-left: 55px;
-  margin-top: 40px;
-
-}
 
 .contact {
   color: rgb(32, 90, 32);
   text-decoration: underline;
 }
 
+.eachline {
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 5px;
+  margin-top: 10px;
+  
+}
 
-.container {
-  max-width: 100%;
-  margin: 20px auto;
-  padding: 20px;
+.eachline.label{
+  margin-top: 0px;
+}
+
+.personal-info , .contactdiv {
+  width: 100%;
+  margin: 50px auto;
   background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  padding-top: 10px;
+}
+
+.personal-info hr {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+.personal-info h1 {
+  color: #717463;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.personal-info .info-item {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.personal-info .info-item .label {
+  font-weight: bold;
+  color: #1f4959;
+}
+
+.personal-info .info-item .value {
+  color: #333;
+}
+
+.personal-info .button-container {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+
+ .logoutButton {
+  padding: 10px ;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: none;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  margin-left: 110px;
+margin-bottom: 10px;
+margin-top: 120px;
+}
+
+.personal-info .logoutButton:hover {
+  opacity: 0.8;
+  box-shadow: 5px 5px 5px rgb(142, 141, 141);
+}
+
+ .kalamtaht {
+  display: inline-block;
+  margin-left: 0px;
+  margin-top: 170px;
+  color: #1f4959;
+}
+
+.personal-info .kalamtaht .contact {
+  color: #205a20;
+  text-decoration: underline;
+}
+
+.personal-info .kalamtaht .links {
+  color: #1f4959;
+  margin-left: 5px;
+}
+
+.personal-info .kalamtaht .links:hover {
+  color: #d5f243;
+}
+.h2{
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #1f4959;
+}
+
+.editdiv {
+  width: 100%;
+  margin: 10px ;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+.editdiv h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #1f4959;
+}
+
+.editdiv hr {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .eachline {
   display: flex;
-  align-items: center;
-  margin-left: 20px;
-  margin-right: 5px;
-  margin-top: 20px;
-  
-  
+  margin-bottom: 10px;
+  align-items: center;  /* Center the eachline items */
+
 }
 
-/* label {
+.eachline label {
   font-weight: bold;
-  flex: 1;
-} */
+  color: #1f4959;
+  text-align: left;
+  margin-bottom: 4px;
+}
 
-/* p {
-  margin: 0;
-  padding: 0;
-  flex: 3;
-} */
-
-/* button {
-  margin-top: 30px;
-  padding: 10px 20px;
-  background-color: #948b7e;
-  color: white;
-  border: none;
+.eachline input {
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  cursor: pointer;
+  font-size: 16px;
 }
 
-button:hover {
-opacity: 0.7;        } */
-/* .outerdiv{
-
-width: 803px;
-} */
-.editinput{
-display: none;
+#newusername, #newemail, #newpassword, #newnumber, #newcountry, #newaddress {
+  width: calc(50% - 50px);
 }
-.edit, .save,.delete {
-display: none; 
+
+#error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  margin-top: 0px; /* Adjust top margin as needed */
+}
+.editButton,
+.saveButton,
+.deleteButton {
+    padding: 10px;
+    color: white;
+    background-color: #948b7e;
+    border: none;
+    transition: opacity 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    margin-left: 10px; /* Adjust spacing between buttons */
 }

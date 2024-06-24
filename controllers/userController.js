@@ -11,6 +11,7 @@ exports.getAdminUser = async (req, res) => {
   }
 };
 
+
 exports.postAdminUser = [
   body('fullname').isString().withMessage('Full Name must be a string').isAlpha('en-US', { ignore: ' ' }).withMessage('Full Name must contain only letters and spaces'),
   body('email').isEmail().withMessage('Please enter a valid email address'),

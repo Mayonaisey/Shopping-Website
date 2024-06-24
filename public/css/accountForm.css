@@ -2,12 +2,12 @@ body {
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
   line-height: 1.4;
-  color: #e5e5e5;
-  background-color: rgb(64, 16, 72);
+  color: black;
+  background-color: white;
 }
 
 .innersection {
-background-color: rgb(93, 58, 100);
+background-color: whitesmoke;
 width: 80%; /* Relative width */
 max-width: 400px; /* Maximum width */
 height: auto; /* Height adjusts to content */
@@ -16,7 +16,7 @@ position: relative;
 transition: transform 0.5s;
 }
 
-@media (max-width: 600px) {
+
 .innersection {
 width: 100%;
 margin-top: 20px;
@@ -30,7 +30,7 @@ header{
     width: 100%;
 
 }
-}
+
 
 button {
 width: 50%;
@@ -54,7 +54,7 @@ a {
 }
 
 a:hover {
-  color: #CE4760;
+  color: blue;
 }
 
 #passmessage {
@@ -108,74 +108,6 @@ button[type="submit"]:hover {
 }
 
 
-/* dah el style bta3 el footer */
-
-.div-buttom {
-  display: flex;
-  margin-top: 40px;
-  background-color: rgb(212, 211, 211);
-}
-
-.div-buttom .alldiv {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-  width: 100%;
-  height: 170px;
-  margin-bottom: 10px;
-}
-
-.div-buttom .alldiv p {
-  margin-top: 0;
-  margin-bottom: 5px;
-}
-
-.div-buttom .alldiv a {
-  text-decoration: none;
-  color: gray;
-
-}
-
-#carticon {
-  margin-top: 40px;
-  margin-left: 980px;
-  font-size: 25px;
-
-}
-
-#homeicon {
-
-  margin-top: 40px;
-  margin-left: 20px;
-  font-size: 25px;
-}
-
-
-.logo {
-  margin: 10px;
-  margin-left: 80px;
-  margin-right: 20px;
-  margin-bottom: 0px;
-  padding: 0%;
-  width: 90px;
-  border-radius: 50%;
-  color: #0F0F0F;
-
-}
-
-header {
-  display: flex;
-  align-items: left;
-  padding: 10px;
-  background-color: rgb(139, 106, 145);
-  height: 100px;
-
-}
-
-.brandname {
-  margin-top: 40px;
-}
 
 form {
   color: #0F0F0F;
@@ -225,7 +157,7 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
+  background-color: rgb(173, 152, 180);
   display: none;
   padding-left: 10px;
 }
@@ -249,3 +181,7 @@ form {
 
   margin-top: 40px;
 }
+
+
+
+

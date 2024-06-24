@@ -1,5 +1,7 @@
 
  
+ document.getElementById('saveButton').style.display = 'none';
+ document.getElementById('deleteButton').style.display = 'none';
 async function View() {
   try {
     const response = await fetch('/user', {
@@ -15,20 +17,16 @@ async function View() {
     }
 
     const userData = await response.json();
-// Update user data
-        document.getElementById('userFullName').textContent = userData.fullname;
-        document.getElementById('welcomeuser').textContent = userData.fullname;
+    console.log('User data fetched:', userData); // Log the fetched user data
 
-
-document.getElementById('newusername').value = userData.fullname;
-        document.getElementById('newemail').value = userData.email;
-        document.getElementById('newnumber').value = userData.phoneNumber;
-        document.getElementById('newcountry').value = userData.city;
-        document.getElementById('newaddress').value = userData.address;
-        document.getElementById('newdetails').value = userData.locationDetails;
-
-        document.getElementById('saveButton').style.display = 'inline-block';
-        document.getElementById('deleteButton').style.display = 'inline-block';
+    // Update user data in the DOM
+    
+    document.getElementById('newusername').value = userData.fullname;
+    document.getElementById('newemail').value = userData.email;
+    document.getElementById('newnumber').value = userData.phoneNumber;
+    document.getElementById('newcountry').value = userData.city;
+    document.getElementById('newaddress').value = userData.address;
+   // document.getElementById('newdetails').value = userData.locationDetails;
 
 
   } catch (error) {
@@ -37,9 +35,17 @@ document.getElementById('newusername').value = userData.fullname;
   }
 }
 
+function edit(){
+  document.getElementById('saveButton').style.display = 'inline-block';
+    document.getElementById('deleteButton').style.display = 'inline-block';
+}
+// Call the function to load user data when the page loads
+document.addEventListener('DOMContentLoaded', View);
 
 // Save user infooo
+
 async function save() {
+  console.log('Save button clicked');
   const email = document.getElementById('newemail').value;
   const newFullname = document.getElementById('newusername').value;
   const newPassword = document.getElementById('newpassword').value;
@@ -49,15 +55,15 @@ async function save() {
   const newLocationDetails = document.getElementById('newdetails').value;
 
   const bodyData = {
-    email,
-    newFullname,
-    newPassword,
-    newPhoneNumber,
-    newCity,
-    newAddress,
-    newLocationDetails
+    newemail: email,
+    newFullname: newFullname,
+    newPassword: newPassword,
+    newPhoneNumber: newPhoneNumber,
+    newCity: newCity,
+    newAddress: newAddress,
+    newLocationDetails: newLocationDetails
   };
-
+  
   console.log('Sending data:', bodyData);
 
   try {
@@ -69,20 +75,22 @@ async function save() {
       body: JSON.stringify(bodyData),
     });
 
+    const result = await response.json();
     if (!response.ok) {
-      throw new Error('Failed to update user details');
+      throw new Error(result.errors ? result.errors.join(', ') : 'Failed to update user details');
     }
 
-    const result = await response.json();
     alert(result.message);
 
-    // Refresh the view with the updated data
     View();
   } catch (error) {
-    alert('Error saving user details');
-    console.error(error);
+    document.getElementById('error-message').innerText = error.message;
+    document.getElementById('error-message').style.display = 'block';
+    console.error('Error:', error);
   }
 }
+
+
 
 async function deleteAccount() {
   const email = document.getElementById('newemail').value;
@@ -102,3 +110,4 @@ async function deleteAccount() {
         alert('Error deleting account');
       }
 }
+

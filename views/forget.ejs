@@ -1,0 +1,97 @@
+<!--forget.ejs-->
+<html>
+  <head>
+    <style>
+
+      
+
+.formmm {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.formmm h2 {
+  text-align: center;
+}
+
+.formmm form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formmm input {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.formmm button {
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.formmm button:hover {
+  background-color: #45a049;
+}
+
+.formmm p {
+  text-align: center;
+}
+
+.formmm a {
+  color: #000;
+  text-decoration: underline;
+  cursor: pointer;
+}
+    </style>
+  </head>
+  <body>
+<!-- Forget Password Form -->
+<div id="forgetPasswordForm" class="formmm" style="display:none;" >
+  <h2>Forgot Password</h2>
+  <form id="forgotPassForm" class="forgotPassForm" onsubmit="return handleForgotPassword(event)" method="POST">
+    <input type="email" name="email" id="forgetEmail" required placeholder="Enter your email...">
+    <input type="tel" name="phoneNumber" id="forgetPhoneNumber" required placeholder="Enter your phone number..." pattern="(10|11|12|15)\d{8}" title="Enter valid phone number">
+    <button type="submit">Submit</button>
+    <p style="color: #948b7e;">Remember your password? <a class="switchToSignIn" onclick="appearsignin()">Sign in.</a></p>
+  </form>
+</div>
+
+
+<script>
+  
+  async function handleForgotPassword(event) {
+      event.preventDefault();
+      const email = document.getElementById('forgetEmail').value;
+      const phoneNumber = document.getElementById('forgetPhoneNumber').value;
+      try {
+        const response = await fetch('/forgot-password', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, phoneNumber })
+        });
+
+        if (response.ok) {
+          alert('Your password has been sent to your email');
+        } else {
+          alert('Failed to send password. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+      }
+    };
+</script>
+</body>
+</html>

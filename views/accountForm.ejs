@@ -14,8 +14,11 @@
 </head>
 
   <%- include('./partials/nav'); %>
-<body>
-
+  <% if (typeof errorMessage !== 'undefined') { %>
+    <div class="error-message">
+      <p><%= errorMessage %></p>
+    </div>
+  <% } %>
 
   <section id="innersection" class="innersection">
 
@@ -36,13 +39,16 @@
 
       <button type="submit">Sign in</button>
 
-      <button id="usersButton" type="button"><a href="adminuser.html">Users</a> </button>
-      <button id="itemsButton" type="button"> <a href="adminchange.html"> Items</a> </button>
       <p style="color: #948b7e;"> Don't have an account yet? <a class="switchToLogin" onclick="appearlogin()">Sign
           Up</a></p>
+          <a class="forgetpassword" href="/forget.ejs" >forget password</a>
 
     </form>
     </div>
+
+
+
+
 
     <!--------------------------------------------------------------------------------------------------------------------------------------->
 
@@ -93,10 +99,10 @@
   </section>
 
 
-  <!-- mafrood dah el footer akhdah mn hagar-->
   <%- include('./partials/footer'); %>
 
-  <script>function appearlogin() {
+  <script>
+  function appearlogin() {
     document.getElementById('innersection').style.transform = 'rotateY(360deg)';
   
     document.getElementById('signinForm').style.display = 'none';
@@ -111,11 +117,20 @@
     document.getElementById('loginForm').style.display = 'none';
     // document.getElementById('signinForm').style.display = 'block';
   };
+
+  function toggleForgetPasswordForm() {
+    var forgetForm = document.getElementById('forgetPasswordForm');
+    if (forgetForm.style.display === 'none') {
+      forgetForm.style.display = 'block';
+    } else {
+      forgetForm.style.display = 'none';
+    }
+  }
+
   </script>
   <!--script src="accountForm.js"> </script>-->
 
   <script src="js-addacc.js"></script>
-  <script src="signin.js"></script>
   <script src="js-edit.js"></script>
 
 </body>
