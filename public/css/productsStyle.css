@@ -304,3 +304,9 @@ a {
     width: 100%;
   }
 }
+
+
+.formSelect{
+  display: flex;
+  flex-direction: column;
+}

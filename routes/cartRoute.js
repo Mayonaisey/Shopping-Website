@@ -1,7 +1,7 @@
 // const express=require ('express');
 // const router =express.Router();
 // const product =require ('../models/productmodel');
-// const User=require('../models/userModel');
+ const User=require('../models/userModel');
 
 // // router.get('/cart',async(req,res)=>{
 // //     const cart=req.session.cart||{};
@@ -48,11 +48,14 @@ const express = require('express');
 const router = express.Router();
 const cartController = require('../controllers/cartController');
 
-// Route to add product to cart
-router.post('/add/:productId', cartController.addToCart);
+ router.use(cartController.isAuthenticated); //middleware
+//  router.get('/products/:productId/cartRoute', cartController.addToCart);
+
 
 // Route to view cart
-router.get('/view', cartController.viewCart);
+router.get('/', cartController.viewCart);
+
+
 
 // Route to remove item from cart
 router.post('/remove/:productId', cartController.removeFromCart);

@@ -11,6 +11,7 @@ exports.getProducts = async (req, res) => {
 
 exports.showProduct = async (req, res) => {
   let productId = req.params.id;
+  console.log(productId);
   try {
     let product = await Product.findById(productId);
     if (product) {
@@ -20,7 +21,7 @@ exports.showProduct = async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send('Internal Server Error');
+    res.status(500).send('Internal Server Error in showProduct');
   }
 };
 
@@ -30,6 +31,8 @@ exports.filterProducts = async (req, res) => {
     let query = {};
     if (size) {
       query['sizes.size'] = size;
+      console.log("in controller filterProd"+ query['sizes.size']);
+
     }
     if (type) {
       query.type = type;

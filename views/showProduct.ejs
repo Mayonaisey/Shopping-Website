@@ -9,10 +9,11 @@
   <link rel="stylesheet" href="/css/productsStyle.css" />
   <link rel="stylesheet" href="./css/nav&footerStyle.css" />
   <script src="https://kit.fontawesome.com/69992cfeb0.js"></script>
+  <%- include('./partials/nav'); %>
+
 </head>
 
 <body>
-  <%- include('./partials/nav'); %>
 
   <div id="fullpage">
     <div class="productDetails">
@@ -28,14 +29,20 @@
         <p class="name">
           <%= item.name %>
         </p>
-        <p class="itemSizes">
-          <% for (let i = 0; i < item.sizes.length; i++) { %>
-            <button class="sizesButtons" id="size<%= i %>" onclick="colorUp('size<%= i %>')">
-              <%= item.sizes[i].size %>
-            </button>
-          <% } %>
-        </p>
-        <div class="quantityDiv">
+          <form class="formSelect" action="/products/<%= item._id %>/cartRoute" method="POST">
+            <%console.log("item id is : "+item._id);%>
+            <input id="prodID" type="hidden" name="productID" value="<%= item._id %>">
+            <select class="sizesButtons" name="size" required>
+              <% for (let i = 0; i < item.sizes.length; i++) { %>
+                <option value="size<%= i %>"><%= item.sizes[i].size %></option>
+               <% } %>
+            </select>
+            <input type="number" class="itemSizes" name="quantity" placeholder="Quantity" required>
+
+            <button class="addToCartBtn" type="submit">Add to Cart</button>
+          </form>
+        
+       <!-- <div class="quantityDiv">
           <p id="quantityID">1</p>
           <button class="quantityBtn" onclick="decNumber('quantityID')">
             <i class="fa-solid fa-caret-down"></i>
@@ -43,14 +50,14 @@
           <button class="quantityBtn" onclick="incNumber('quantityID')">
             <i class="fa-solid fa-caret-up"></i>
           </button>
-        </div>
-        <p class="itemPrice">
+        </div> -->
+        <p class="itemPrice" >
           <%= item.price %> EGP
         </p>
-        <button class="addToCartBtn" onclick="addToCart('<%= item.id %>')"> 
+      <!-- <a href="/products/<%= item.id %>/cartRoute"> <button class="addToCartBtn" > 
           Add To Cart
-        </button>
-      </div>
+        </button></a>  -->
+      </div> 
     </div>
     <div class="productDescription">
       <p><%= item.description %> </p>
@@ -60,6 +67,7 @@
 
   <script>
     function colorUp(sizeId) {
+      let sizeIsSelected=0;
       let sizesButtons = document.getElementsByClassName("sizesButtons");
       for (let i = 0; i < sizesButtons.length; i++) {
         if (document.getElementById("size" + i).style.backgroundColor == "#565656") {
@@ -67,6 +75,7 @@
         }
       }
       document.getElementById(sizeId).style.backgroundColor = "#f5f5f5";
+      return i;
       sizeIsSelected = 1;
     }
 
@@ -82,34 +91,34 @@
       if (number > 0) quantity.innerHTML = number - 1;
     }
 
-    function addToCart(itemId) {
-      // Fetch request to add the item to the cart
-      const quantity = document.getElementById('quantityID').innerText;
+    // function addToCart(itemId) {
+    //   // Fetch request to add the item to the cart
+    //   const quantity = document.getElementById('quantityID').innerText;
 
-      fetch('/cartRoute/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ itemId: itemId, quantity: quantity }),
-      })
-      .then(response => {
-        if (response.status === 200) {
-          // Successfully added to cart
-          alert('Item added to cart!');
-        } else if (response.status === 401) {
-          // Not authenticated
-          window.location.href = '/login';
-        } else {
-          // Error adding to cart
-          alert('Error adding item to cart');
-        }
-      })
-      .catch(error => {
-        console.error('Error adding to cart:', error);
-        alert('Error adding item to cart');
-      });
-    }
+    //   fetch('/cartRoute/add', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({ itemId: itemId, quantity: quantity }),
+    //   })
+    //   .then(response => {
+    //     if (response.status === 200) {
+    //       // Successfully added to cart
+    //       alert('Item added to cart!');
+    //     } else if (response.status === 401) {
+    //       // Not authenticated
+    //       window.location.href = '/login';
+    //     } else {
+    //       // Error adding to cart
+    //       alert('Error adding item to cart');
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.error('Error adding to cart:', error);
+    //     alert('Error adding item to cart');
+    //   });
+    // }
   </script>
 </body>
 <%- include('./partials/footer'); %>

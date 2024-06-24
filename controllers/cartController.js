@@ -3,33 +3,36 @@ const Product = require('../models/productmodel');
 
 
 exports.addToCart = async (req, res) => {
-  // if(!req.seesion.userId){
-  //   return res.redirect(`/login?redirectTo=${req.originalUrl}`);
-  // }
-  const {productID}=req.params;
-  const {quantity}=req.body;
+  const { productID, quantity, Prodsize } = req.body; // Extract productID, quantity, and size from req.body
+
+  console.log("Product ID:", productID);
+  console.log("Quantity:", quantity);
+  console.log("Size:", Prodsize);
   try {
     const UserId = req.session.userId;
-    const user = await User.findbyId(req.session.userId);
+    const user = await User.findById(req.session.userId);
 
-    const productInCart = user.cart.find(item => item.productId.toString() === productId);
+    const productInCart = user.cart.find(item => item.productId.toString() === productID && item.size===Prodsize );
 
     if (productInCart) {
       // Increase quantity if already in cart
       productInCart.quantity +=parseInt(quantity);
     } else {
       // Add new product to cart
-      user.cart.push({ productId, quantity :parseInt(quantity)});
+      parseInt(quantity);
+      console.log(quantity);
+      user.cart.push({ productId: productID, quantity :parseInt(quantity), size:Prodsize});
     }
 
     await user.save();
-   // res.redirect('/cart');
+   // res.redirect('/cart'); 
+   console.log("data saved successfully");
    //3ayza yrender el [product page]
-   res.render('cart',{cart:user.cart,alert:'product added to cart successfully '});
+   res.redirect('/products');
   } catch (err) {
     console.error('Error adding to cart:', err);
    // res.status(500).send('Internal Server Error');
-   res.render('cart',{alert:'An error occurred. Please try again!'});
+   res.redirect('/products');
   }
 };
 
@@ -99,5 +102,5 @@ exports.updateCart=async(req,res)=>{
     if (req.session.authenticated) {
       return next();
     }
-    res.redirect('./accountForm.ejs'); 
+    res.render('./accountForm'); //opens this file but doesn't change the url 
   };

@@ -13,48 +13,19 @@
   <div class="body">
     <h1 class="head">My Cart </h1>
     <div class="cart">
-      <!--<%if((cart.length)>0){%>
-        <%cart.forEach(item=>{%>
-      <div class="listcart">
-        <div class="image">
-          <img src="<%= item.productId.imageUrl %>" width="250" height="200">
-        </div>
 
-        <div class="cart-info">
-          <div class="name"><%=item.productId.name%> </div><br>
-          <div class="code">Product code:<%=item.productId._id%></div>
-          <br><br>
-          <div class="size">size: M</div>
-        </div>
-
-        <div class="quan" data-item-id="<%=item.id%>">
-          <button class="min">-</button>
-          <input class="qy" type="text" value="<%=item.quantity%>" readonly>
-          <button class="plus">+</button>
-        </div>
-
-        <div class="s">
-          <input class="pr" type="text" value="<%= item.productId.price * item.quantity.toFixed(2) %> EGP" readonly><br><br>
-          <span>
-            <form action="/cart/remove/<%item.productId._id%>" method="post">
-            <button class="delete">d</button>
-            </form>
-            <button id="wishlist">w</button>
-          </span>
-        </div>
-      </div>
-      <%});%>
-
-      <%}%>-->
-      <% if (cart.length > 0) { %>
-        <% cart.forEach(item => { %>
+      <% if (user.cart.length> 0) { %>
+        <% user.cart.forEach(item=> { %>
           <div class="listcart">
             <div class="image">
-              <img src="<%= item.productId.imageUrl %>" width="250" height="200">
+              <img src="<%= item.productId.image1 %>" width="250" height="200">
             </div>
             <div class="cart-info">
-              <div class="name"><%= item.productId.name %></div><br>
-              <div class="code">Product code: <%= item.productId._id %></div><br><br>
+              <div class="name">
+                <%= item.productId.name %>
+              </div><br>
+              <div class="code">Product code: <%= item.productId._id %>
+              </div><br><br>
               <div class="size">size: M</div>
             </div>
             <div class="quan" data-item-id="<%= item.id %>">
@@ -63,7 +34,8 @@
               <button class="plus">+</button>
             </div>
             <div class="s">
-              <input class="pr" type="text" value="<%= (item.productId.price * item.quantity).toFixed(2) %> EGP" readonly><br><br>
+              <input class="pr" type="text" value="<%= (item.productId.price * item.quantity).toFixed(2) %> EGP"
+                readonly><br><br>
               <span>
                 <form action="/cart/remove/<%= item.productId._id %>" method="post">
                   <button class="delete">d</button>
@@ -72,44 +44,49 @@
               </span>
             </div>
           </div>
-        <% }); %>
-      <% } else { %>
-        <p>Your cart is empty.</p>
-      <% } %>
-      
-      <div class="total-price">
-        <h2>Order Summary</h2>
-        <table>
-          <tr>
-            <td class="left">total price</td>
-            <td></td>
-            <td class="right">
-              <div class="total">
-                <input id="Tprice" type="text" value="<%= cart.reduce((total, item) => total + item.productId.price * item.quantity, 0) %>  EGP" readonly>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="left"> Discounts </td>
-            <td></td>
-            <td class="right">
-              <div class="discount">
-                <input id="dis" type="text" value="10%" readonly>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td class="left">Grand Total</td>
-            <td></td>
-            <td class="right">
-              <div class="grand-total">
-                <input id="grand" type="text" value="<%= (cart.reduce((total, item) => total + item.productId.price * item.quantity, 0) * 0.9).toFixed(2) %> EGP "readonly>
-              </div>
-            </td>
-          </tr>
-        </table>
-        <a href="./checkout.ejs"><button class="to-checkout" id="bt" onclick="passValue()">Proceed to checkout</button>
-      </div>
+          <% }); %>
+            <% } else { %>
+              <p>Your cart is empty.</p>
+              <% } %>
+
+                <div class="total-price">
+                  <h2>Order Summary</h2>
+                  <table>
+                    <tr>
+                      <td class="left">total price</td>
+                      <td></td>
+                      <td class="right">
+                        <div class="total">
+                          <input id="Tprice" type="text"
+                            value="<%= cart.reduce((total, item) => total + item.productId.price * item.quantity, 0) %>  EGP"
+                            readonly>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="left"> Discounts </td>
+                      <td></td>
+                      <td class="right">
+                        <div class="discount">
+                          <input id="dis" type="text" value="10%" readonly>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="left">Grand Total</td>
+                      <td></td>
+                      <td class="right">
+                        <div class="grand-total">
+                          <input id="grand" type="text"
+                            value="<%= (cart.reduce((total, item) => total + item.productId.price * item.quantity, 0) * 0.9).toFixed(2) %> EGP "
+                            readonly>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                  <a href="./checkout.ejs"><button class="to-checkout" id="bt" onclick="passValue()">Proceed to
+                      checkout</button>
+                </div>
     </div>
   </div>
 

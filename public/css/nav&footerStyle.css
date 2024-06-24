@@ -251,3 +251,44 @@ text-align: center;
       font-size: 1.2em;
   }
 }
+
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #2e2e2e;
+  color: #ffffff;
+}
+
+
+.dark-mode .sidebar,
+.dark-mode .product-list .card,
+.dark-mode .details,
+.dark-mode .productDetails,
+.dark-mode #page {
+  background-color: #161616;
+  color: #ffffff;
+}
+
+.dark-mode .card {
+  background-color: #4e4e4e;
+}
+
+.dark-mode .card .text,
+.dark-mode .card .price {
+  color: #ffffff;
+}
+
+.dark-mode #searchBtn,
+.dark-mode #exitBtn,
+.dark-mode .size-btn,
+.dark-mode .product-btn {
+  background-color: #4e4e4e;
+  color: #ffffff;
+}
+
+.dark-mode .size-btn:hover,
+.dark-mode .product-btn:hover {
+  color: #b3b3b3;
+}
+
+/* More dark mode styles for other elements if necessary */

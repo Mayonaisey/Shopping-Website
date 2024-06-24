@@ -48,7 +48,7 @@
             <label for="prod5">Dress</label><br>
           </div>
         </div>
-        <button type="button" id="searchBtn" onclick="searchProduct()">Search</button>
+       <a href="/products/filter"><button type="button" id="searchBtn" onclick="searchProduct()">Search</button></a> 
         <button type="button" id="exitBtn" onclick="clearCart()">Exit Page</button>
       </div>
       <section class="product-list">
@@ -56,12 +56,12 @@
         <div id="product-container">
           <% products.forEach((product) => { %>
             <a class="card" href="/products/<%= product.id %>">
-              <img src="<%= product.image1 %>" class="img">
+              <img src="/images/db/<%=product.image1 %>" class="img">
               <span class="tooltiptext"><%= product.name %></span>
               <p class="text"><%= product.name %></p>
               <p class="price">Price: <%= product.price %> EGP</p>
             </a>
-          <% }) %>
+          <% }); %>
         </div>
       </section>
     </div>
@@ -90,6 +90,7 @@
     }
 
     async function searchProduct() {
+      console.log("in finc searchprod");
       let sizeSelected = "";
       let prodSelected = "";
 
@@ -99,12 +100,15 @@
       for (let i = 0; i < siz.length; i++) {
         if (siz[i].checked) {
           sizeSelected = siz[i].value;
+          console.log("in if siz[i]: "+sizeSelected)
         }
       }
 
       for (let i = 0; i < prod.length; i++) {
         if (prod[i].checked) {
           prodSelected = prod[i].value;
+          console.log("in if siz[i]: "+prod[i].value)
+
         }
       }
 
