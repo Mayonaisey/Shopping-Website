@@ -28,8 +28,8 @@ document.getElementById('editform').addEventListener('submit', function(event) {
         valid = false;
     }
 
-    if (phoneNumber === "" || !/^\d{10}$/.test(phoneNumber)) {
-        errorMessage += "Valid Phone Number is required (10 digits).\n";
+    if (phoneNumber === "" || !/^\d{11}$/.test(phoneNumber)) {
+        errorMessage += "Valid Phone Number is required (11 digits).\n";
         valid = false;
     }
 

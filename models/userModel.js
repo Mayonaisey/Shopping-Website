@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
         trim: true
     },
     phoneNumber: {
-        type: Number,
+        type: String,
         required: true,
      
        
@@ -39,6 +39,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 6
+      
     },
     cart:[{
         productId:{ type:mongoose.Schema.Types.ObjectId,ref:'product'},

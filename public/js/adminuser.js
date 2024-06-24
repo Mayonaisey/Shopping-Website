@@ -1,5 +1,5 @@
 document.getElementById('userForm').addEventListener('submit', function(event) {
-    // event.preventDefault();
+    event.preventDefault();
     
     let fullname = document.getElementById('fullname').value.trim();
     let phoneNumber = document.getElementById('phone').value.trim();
@@ -27,7 +27,7 @@ if (city === "") {
     errorMessage += "City must contain only letters and spaces.\n";
     valid = false;
 }
-    if (phoneNumber === "" || !/^\d{10}$/.test(phoneNumber)) {
+    if (phoneNumber === "" || !/^\d{11}$/.test(phoneNumber)) {
         errorMessage += "Valid Phone Number is required (10 digits).\n";
         valid = false;
     }
