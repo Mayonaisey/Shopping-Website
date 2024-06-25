@@ -27,13 +27,14 @@ exports.showProduct = async (req, res) => {
 
 exports.filterProducts = async (req, res) => {
   try {
-    const { size, type } = req.body;
+    const { type } = req.body;
+    console.log("type in filterproducts:"+type+" size: ");
     let query = {};
-    if (size) {
-      query['sizes.size'] = size;
-      console.log("in controller filterProd"+ query['sizes.size']);
+    // if (size) {
+    //   query['sizes.size'] = size;
+    //   console.log("in controller filterProd"+ query['sizes.size']);
 
-    }
+    // }
     if (type) {
       query.type = type;
     }
@@ -41,6 +42,7 @@ exports.filterProducts = async (req, res) => {
     const products = await Product.find(query);
     res.json(products);
   } catch (err) {
+    console.error('Error filtering products:', err);
     res.status(500).json({ message: err.message });
   }
 };

@@ -19,10 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   secret: 'some secret',
   resave: false,
-/*  saveUninitialized: false,//3shan my3melsh session gdeeda m3 kol req
-  cookie: { maxAge: 1800000  //30 mins
-}*/
-
   saveUninitialized: true,
   cookie: { secure: false}}
 ));
@@ -34,7 +30,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 
-const port = 3000;
+
+const port = 3001;
 
 //connect db
 const dbURl = 'mongodb+srv://hagar2204577:R7nULH9qSYkl5otw@hagar.shuywlc.mongodb.net/alldata?retryWrites=true&w=majority';
@@ -49,6 +46,16 @@ mongoose.connect(dbURl, {})
   });
 
 
+//mayaaaa
+const productsRouter=require('./routes/products');
+app.use('/products', productsRouter);
+
+//fatima
+const cartRouter=require('./routes/cartRoute');
+app.use('/cartRoute', cartRouter);
+
+const checkoutRouter=require('./routes/checkoutRoute');
+app.use('/checkout', checkoutRouter);
 
   /////////// Authentication middleware
 function isAuthenticated(req, res, next) {
@@ -60,17 +67,122 @@ function isAuthenticated(req, res, next) {
 
 
 //hagar
-const productRoutes = require('./routes/proudectRoutes');
-const userRoutes = require('./routes/userRoutes');
-app.use(productRoutes);
-app.use(userRoutes);
+// Send to DB
+app.post('/adminuser',
+  [
+    body('fullname').isString().withMessage('Full Name must be a string').isAlpha('en-US', { ignore: ' ' }).withMessage('Full Name must contain only letters and spaces'),
+    body('email').isEmail().withMessage('Please enter a valid email address'),
+    body('phoneNumber').isString().isLength({ min: 11, max: 11 }).withMessage('Please enter a valid 10-digit phone number'),
+    body('city').isString().withMessage('City must be a string').isAlpha('en-US', { ignore: ' ' }).withMessage('City must contain only letters and spaces'),
+    body('address').isString().withMessage('Address must be a string'),
+    body('locationDetails').isString().withMessage('Location Details must be a string'),
+    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-app.get('/dashboard', (req, res) => {
-  res.render('dashboard');
+    const { fullname, email, phoneNumber, city, address, locationDetails, password } = req.body;
+
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const newUser = new User({
+        fullname,
+        email,
+        phoneNumber,
+        city,
+        address,
+        locationDetails,
+        password:hashedPassword,
+      });
+
+      await newUser.save();
+
+      res.redirect('/adminuser');
+    } catch (err) {
+      console.error('Error adding user:', err);
+      res.status(500).send('Error adding user: ' + err.message);
+    }
+  }
+);
+
+// Edit user form
+app.get('/edituser/:id', async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const user = await User.findById(userId);
+    res.render('edituser', { user });
+  } catch (err) {
+    console.error('Error fetching user:', err);
+    res.status(500).send('Error fetching user: ' + err.message);
+  }
 });
-///////////////////// zahaa //////////////////////////
+
+// Update user
+app.post('/edituser/:id', [
+  body('fullname').isString().withMessage('Full Name must be a string').isAlpha('en-US', { ignore: ' ' }).withMessage('Full Name must contain only letters and spaces'),
+  body('email').isEmail().withMessage('Please enter a valid email address'),
+  body('phoneNumber').isString().isLength({ min: 11, max: 11 }).withMessage('Please enter a valid 11-digit phone number'),
+  body('city').isString().withMessage('City must be a string').isAlpha('en-US', { ignore: ' ' }).withMessage('City must contain only letters and spaces'),
+  body('address').isString().withMessage('Address must be a string'),
+  body('locationDetails').isString().withMessage('Location Details must be a string'),
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+  }
+
+  const userId = req.params.id;
+  const { fullname, email, phoneNumber, city, address, locationDetails } = req.body; // Corrected 'phone' to 'phoneNumber'
+
+  console.log('Updating user with ID:', userId);
+  console.log('Received data:', req.body);
+
+  try {
+      await User.findByIdAndUpdate(userId, {
+          fullname,
+          email,
+          phoneNumber,
+          city,
+          address,
+          locationDetails,
+      });
+
+      res.redirect('/adminuser');
+  } catch (err) {
+      console.error('Error updating user:', err);
+      res.status(500).send('Error updating user: ' + err.message);
+  }
+});
+
+// Delete user
+app.get('/deleteuser/:id', async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    await User.findByIdAndDelete(userId);
+    res.redirect('/adminuser');
+  } catch (err) {
+    console.error('Error deleting user:', err);
+    res.status(500).send('Error deleting user: ' + err.message);
+  }
+});
 
 app.get('/', (req, res) => {
+  res.render('home')});
+//hagar
+const productRoutes = require('./routes/proudectRoutes');
+
+app.use(productRoutes);
+
+app.get('/dashboard', (req, res) => {
+  res.render('dashboard')});
+///////////////////// zahaa //////////////////////////
+
+app.get('/accountForm', (req, res) => {
   res.render('accountForm');
 });
 
@@ -242,6 +354,78 @@ app.put('/update', isAuthenticated, async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
+    
+    const errors = [];
+    if (newFullname && newFullname.trim().length === 0) {
+      errors.push('Fullname cannot be empty');
+      console.log('Validation error: Fullname cannot be empty');
+    }
+
+    if (newemail && !/\S+@\S+\.\S+/.test(newemail)) {
+      errors.push('Must be a valid email');
+      console.log('Validation error: Must be a valid email');
+    }
+
+    if (newPhoneNumber && !/^(010|011|012|015)\d{8}$/.test(newPhoneNumber)) {
+      errors.push('Must be a valid phone number');
+      console.log('Validation error: Must be a valid phone number');
+    }
+
+    if (newCity && newCity.trim().length === 0) {
+      errors.push('City cannot be empty');
+      console.log('Validation error: City cannot be empty');
+    }
+
+    if (newAddress && newAddress.trim().length === 0) {
+      errors.push('Address cannot be empty');
+      console.log('Validation error: Address cannot be empty');
+    }
+
+    if (newLocationDetails && newLocationDetails.trim().length === 0) {
+      errors.push('Location details cannot be empty');
+      console.log('Validation error: Location details cannot be empty');
+    }
+
+    if (newPassword && (newPassword.length < 8 || !/[A-Z]/.test(newPassword))) {
+      errors.push('Password must be at least 8 characters long and contain at least one capital letter');
+      console.log('Validation error: Password must be at least 8 characters long and contain at least one capital letter');
+    }
+
+    if (errors.length > 0) {
+      console.log('Validation errors:', errors);
+      return res.status(400).json({ errors });
+    }
+
+    if (newemail) {
+      user.email = newemail;
+      console.log('Updated email:', newemail);
+    }
+    if (newFullname) {
+      user.fullname = newFullname;
+      console.log('Updated fullname:', newFullname);
+    }
+    if (newPassword) {
+      user.password = await bcrypt.hash(newPassword, 10);
+      console.log('Updated password (hashed):', user.password);
+    }
+    if (newPhoneNumber) {
+      user.phoneNumber = newPhoneNumber;
+      console.log('Updated phone number:', newPhoneNumber);
+    }
+    if (newCity) {
+      user.city = newCity;
+      console.log('Updated city:', newCity);
+    }
+    if (newAddress) {
+      user.address = newAddress;
+      console.log('Updated address:', newAddress);
+    }
+    if (newLocationDetails) {
+      user.locationDetails = newLocationDetails;
+      console.log('Updated location details:', newLocationDetails);
+    }
+
+
 
     await user.save();
     console.log('User updated successfully');
@@ -253,7 +437,6 @@ app.put('/update', isAuthenticated, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
 //lw user 3ayz y delete his acc 
 app.delete('/delete/:email', isAuthenticated, async (req, res) => {
   try {
@@ -319,7 +502,7 @@ req.redirect('/forget');
     console.error('Error:', error);
     res.status(500).send('Error sending the password');
   }
-});
+}); 
 
 // Middleware to fetch user and populate wishlist
 app.get('/wishlist', async (req, res) => {

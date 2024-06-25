@@ -51,9 +51,9 @@ const productSchema = new mongoose.Schema({
   },
 });
 
-productSchema.statics.findById = function(id) {
-  return this.findOne({ _id: id });
-};
+// productSchema.statics.findById = function(id) {
+//   return this.findOne({ _id: id });
+// };
 const Product = mongoose.model("Productmodel", productSchema);
 
 module.exports = Product;

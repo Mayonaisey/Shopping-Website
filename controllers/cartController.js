@@ -40,13 +40,15 @@ exports.addToCart = async (req, res) => {
 exports.viewCart = async (req, res) => {
  
   try {
-    const UserId= req.session.userId;
+    const UserId= req.session.userId; 
+    console.log("user id is: "+UserId);
     const user = await User.findById(UserId).populate('cart.productId');
+console.log("user is :"+user);
     if(user){
-      res.render('cart',{cart:user.cart,alert:null});
+      res.render('cart',{user,alert:null});
     }
     else{
-      res.render('cart', { alert: 'User not found' });
+      res.redirect('/accountForm');
     }
   } catch (err) {
     console.error('Error viewing cart:', err);

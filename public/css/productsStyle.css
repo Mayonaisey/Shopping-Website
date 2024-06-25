@@ -310,3 +310,7 @@ a {
   display: flex;
   flex-direction: column;
 }
+
+.producttxt{
+  padding: 50px;
+}

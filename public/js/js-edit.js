@@ -44,7 +44,8 @@ document.addEventListener('DOMContentLoaded', View);
 
 // Save user infooo
 
-async function save() {
+async function save(event) {
+  event.preventDefault();
   console.log('Save button clicked');
   const email = document.getElementById('newemail').value;
   const newFullname = document.getElementById('newusername').value;
@@ -52,7 +53,6 @@ async function save() {
   const newPhoneNumber = document.getElementById('newnumber').value;
   const newCity = document.getElementById('newcountry').value;
   const newAddress = document.getElementById('newaddress').value;
-  const newLocationDetails = document.getElementById('newdetails').value;
 
   const bodyData = {
     newemail: email,
@@ -60,8 +60,7 @@ async function save() {
     newPassword: newPassword,
     newPhoneNumber: newPhoneNumber,
     newCity: newCity,
-    newAddress: newAddress,
-    newLocationDetails: newLocationDetails
+    newAddress: newAddress
   };
   
   console.log('Sending data:', bodyData);

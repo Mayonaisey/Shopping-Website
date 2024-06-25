@@ -37,9 +37,7 @@
           </button>
           <div id="dropdown-producttype"> 
             <input type="radio" id="prod1" name="prod" value="T-shirt">
-            <label for="prod1">T-shirt</label><br>
-            <input type="radio" id="prod2" name="prod" value="Blouse">
-            <label for="prod2">Blouse</label><br>
+            <label for="prod1">Shirt</label><br>
             <input type="radio" id="prod3" name="prod" value="Jeans">
             <label for="prod3">Jeans</label><br>
             <input type="radio" id="prod4" name="prod" value="Sweatshirt">
@@ -132,6 +130,7 @@
     }
 
     function displayFilteredProducts(products) {
+      console.log("in display filtered"+products.name);
       const container = document.getElementById('product-container');
       container.innerHTML = ''; // Clear previous products
 

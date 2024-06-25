@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="/css/nav&footerStyle.css" />
 <header>
     <div class="logo-container">
-        <a href="home.html"><img src="./logo.png" class="logo" alt="cannot load pic" width="100px"></a>
+        <a href="/"><img src="./logo.png" class="logo" alt="cannot load pic" width="100px"></a>
     </div>
     
     <div class="search-container">
@@ -14,21 +14,22 @@
     
     <div class="icons">
         <div class="icon-container">
-            <a href="myprofile.html">
+            <a href="/myprofile">
                 <i class="fas fa-user"></i>
             </a>
             <div class="user-box">
                 <p>Log in to enjoy special offers for members and fast checkout.</p>
-                <button class="user-btn login-btn"><a href="signin.html">Log In</a></button>
-                <button class="user-btn signup-btn"><a href="addaccount.html">Create Account</a></button>
+                <button class="user-btn login-btn" onclick="appearlogin()"><a href="/accountForm">Log In</a></button>
+                <button class="user-btn signup-btn" onclick="appearsignin()"><a href="/accountForm" >Sign In</a></button>
             </div>
         </div>
-        <a href="wishlist.html" target="_self">
+        <a href="/insidewishlist" target="_self">
             <i class="far fa-heart"></i>
         </a>
-        <a href="../route/cartRoute" target="_self">
+        <a href="/cartRoute" target="_self">
             <i class="fas fa-shopping-cart"></i>
         </a>
     </div>
 </header>
 <script src="darkmode.js"></script>
+<!-- <script src="./public/js/accountForm.js"></script> -->
